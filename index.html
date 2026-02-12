@@ -1,0 +1,1631 @@
+<!doctype html>
+<html lang="nl">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Briefing: Ontology &amp; Connected Products</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap"
+			rel="stylesheet"
+		/>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/lucide/0.344.0/umd/lucide.min.js"></script>
+		<style>
+			:root {
+				--primary: #1e3a5f;
+				--primary-light: #2d5a8e;
+				--primary-dark: #152a45;
+				--primary-50: #f0f5fa;
+				--primary-100: #dae5f2;
+				--primary-200: #b5cce6;
+				--primary-foreground: #ffffff;
+				--surface: #f8fafc;
+				--border: #e2e8f0;
+				--success: #16a34a;
+				--success-light: #dcfce7;
+				--warning: #d97706;
+				--warning-light: #fef3c7;
+				--danger: #dc2626;
+				--danger-light: #fee2e2;
+				--text-primary: #1a202c;
+				--text-secondary: #64748b;
+				--text-tertiary: #94a3b8;
+				--text-dark: #1e293b;
+				--border-subtle: #cbd5e1;
+				--border-light: #e2e8f0;
+				--bg-light: #f1f5f9;
+			}
+
+			* {
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+
+			body {
+				font-family: "Inter", ui-sans-serif, system-ui, sans-serif;
+				-webkit-font-smoothing: antialiased;
+				color: var(--text-primary);
+				font-size: 14px;
+				line-height: 1.7;
+				background: #ffffff;
+			}
+
+			/* ── Hero ── */
+			.hero {
+				background: linear-gradient(
+					135deg,
+					#1e3a5f 0%,
+					#2d5a8e 50%,
+					#1e3a5f 100%
+				);
+				color: var(--primary-foreground);
+				padding: 4rem 1rem;
+				position: relative;
+				overflow: hidden;
+			}
+			.hero::before,
+			.hero::after {
+				content: "";
+				position: absolute;
+				border-radius: 50%;
+				border: 2px solid rgba(255, 255, 255, 0.08);
+			}
+			.hero::before {
+				width: 400px;
+				height: 400px;
+				top: -120px;
+				right: -80px;
+			}
+			.hero::after {
+				width: 260px;
+				height: 260px;
+				bottom: -60px;
+				left: -40px;
+			}
+			.hero-inner {
+				max-width: 768px;
+				margin: 0 auto;
+				position: relative;
+				z-index: 1;
+			}
+			.hero-badge {
+				display: inline-block;
+				font-size: 11px;
+				font-weight: 500;
+				text-transform: uppercase;
+				letter-spacing: 3px;
+				color: rgba(255, 255, 255, 0.7);
+				margin-bottom: 1.5rem;
+			}
+			.hero h1 {
+				font-size: 30px;
+				font-weight: 700;
+				line-height: 1.25;
+				margin-bottom: 1rem;
+			}
+			.hero p {
+				font-size: 18px;
+				color: rgba(255, 255, 255, 0.85);
+				max-width: 600px;
+			}
+
+			/* ── Main ── */
+			.main {
+				max-width: 768px;
+				margin: 0 auto;
+				padding: 2rem 1rem 4rem;
+			}
+
+			/* ── Sections ── */
+			.section {
+				margin-bottom: 3rem;
+			}
+			.section-number {
+				display: inline-flex;
+				align-items: center;
+				justify-content: center;
+				width: 28px;
+				height: 28px;
+				border-radius: 50%;
+				background: var(--primary);
+				color: var(--primary-foreground);
+				font-size: 12px;
+				font-weight: 700;
+				margin-bottom: 0.75rem;
+			}
+			.section h2 {
+				font-size: 24px;
+				font-weight: 700;
+				color: var(--primary);
+				margin-bottom: 0.5rem;
+			}
+			.section-lead {
+				font-size: 14px;
+				color: var(--text-secondary);
+				margin-bottom: 1.25rem;
+			}
+
+			/* ── Cards ── */
+			.card {
+				background: #ffffff;
+				border-radius: 12px;
+				border: 1px solid var(--border);
+				padding: 1.25rem;
+				margin-bottom: 1rem;
+			}
+			.card-surface {
+				background: var(--surface);
+				border-radius: 8px;
+				padding: 1rem;
+				margin-bottom: 0.75rem;
+			}
+			.card-surface:last-child {
+				margin-bottom: 0;
+			}
+
+			/* ── Analogy block ── */
+			.analogy {
+				background: var(--primary-50);
+				border-left: 3px solid var(--primary);
+				border-radius: 0 8px 8px 0;
+				padding: 1.25rem;
+				margin: 1.5rem 0;
+			}
+			.analogy-label {
+				font-size: 11px;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				color: var(--primary);
+				margin-bottom: 0.5rem;
+			}
+
+			/* ── Interactive diagram ── */
+			.ontology-diagram {
+				background: var(--surface);
+				border-radius: 12px;
+				border: 1px solid var(--border);
+				padding: 1.5rem;
+				margin: 1.5rem 0;
+			}
+			.diagram-title {
+				font-size: 12px;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				color: var(--text-secondary);
+				text-align: center;
+				margin-bottom: 1.25rem;
+			}
+
+			/* SVG diagram */
+			.diagram-svg {
+				width: 100%;
+				max-width: 620px;
+				margin: 0 auto;
+				display: block;
+			}
+
+			/* ── Layers visual ── */
+			.layers-stack {
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+				margin: 1.5rem 0;
+			}
+			.layer {
+				padding: 1rem 1.25rem;
+				border: 1px solid var(--border);
+				position: relative;
+				cursor: pointer;
+				transition: all 0.2s;
+			}
+			.layer:first-child {
+				border-radius: 12px 12px 0 0;
+			}
+			.layer:last-child {
+				border-radius: 0 0 12px 12px;
+			}
+			.layer + .layer {
+				border-top: none;
+			}
+			.layer:hover {
+				background: var(--primary-50);
+				border-color: var(--primary-200);
+			}
+			.layer:hover + .layer {
+				border-top-color: var(--primary-200);
+			}
+			.layer-tag {
+				font-size: 10px;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				color: var(--text-tertiary);
+				margin-bottom: 0.25rem;
+			}
+			.layer-name {
+				font-size: 16px;
+				font-weight: 600;
+				color: var(--text-dark);
+			}
+			.layer-desc {
+				font-size: 13px;
+				color: var(--text-secondary);
+				max-height: 0;
+				overflow: hidden;
+				transition:
+					max-height 0.3s ease,
+					margin-top 0.3s ease;
+				margin-top: 0;
+			}
+			.layer.active .layer-desc {
+				max-height: 200px;
+				margin-top: 0.5rem;
+			}
+			.layer-icon {
+				position: absolute;
+				right: 1.25rem;
+				top: 50%;
+				transform: translateY(-50%);
+				color: var(--text-tertiary);
+				transition: transform 0.2s;
+			}
+			.layer.active .layer-icon {
+				transform: translateY(-50%) rotate(180deg);
+			}
+			.layer.active {
+				background: var(--primary-50);
+				border-color: var(--primary-200);
+			}
+
+			/* ── Scenario ── */
+			.scenario-steps {
+				display: flex;
+				flex-direction: column;
+				gap: 0;
+				margin: 1.5rem 0;
+				position: relative;
+			}
+			.scenario-step {
+				display: flex;
+				gap: 1rem;
+				align-items: flex-start;
+				padding: 0.75rem 0;
+			}
+			.step-dot-col {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				flex-shrink: 0;
+				width: 32px;
+			}
+			.step-dot {
+				width: 32px;
+				height: 32px;
+				border-radius: 50%;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 13px;
+				font-weight: 700;
+				flex-shrink: 0;
+			}
+			.step-dot.active {
+				background: var(--primary);
+				color: var(--primary-foreground);
+			}
+			.step-line {
+				width: 2px;
+				flex: 1;
+				min-height: 12px;
+				background: var(--primary-200);
+			}
+			.step-content h4 {
+				font-size: 14px;
+				font-weight: 600;
+				color: var(--text-dark);
+				margin-bottom: 0.15rem;
+			}
+			.step-content p {
+				font-size: 13px;
+				color: var(--text-secondary);
+			}
+
+			/* ── Comparison table ── */
+			.compare-grid {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				margin: 1.5rem 0;
+			}
+			@media (max-width: 560px) {
+				.compare-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+			.compare-card {
+				border-radius: 12px;
+				padding: 1.25rem;
+				border: 1px solid;
+			}
+			.compare-card.without {
+				background: var(--danger-light);
+				border-color: #fca5a5;
+			}
+			.compare-card.with {
+				background: var(--success-light);
+				border-color: #86efac;
+			}
+			.compare-card h4 {
+				font-size: 14px;
+				font-weight: 600;
+				margin-bottom: 0.75rem;
+			}
+			.compare-card.without h4 {
+				color: var(--danger);
+			}
+			.compare-card.with h4 {
+				color: var(--success);
+			}
+			.compare-card ul {
+				list-style: none;
+				padding: 0;
+			}
+			.compare-card li {
+				font-size: 13px;
+				color: var(--text-primary);
+				padding: 0.3rem 0;
+				padding-left: 1.2rem;
+				position: relative;
+			}
+			.compare-card.without li::before {
+				content: "✕";
+				position: absolute;
+				left: 0;
+				color: var(--danger);
+				font-weight: 700;
+				font-size: 11px;
+			}
+			.compare-card.with li::before {
+				content: "✓";
+				position: absolute;
+				left: 0;
+				color: var(--success);
+				font-weight: 700;
+				font-size: 12px;
+			}
+
+			/* ── Takeaway box ── */
+			.takeaway {
+				background: var(--warning-light);
+				border: 1px solid #fde68a;
+				border-radius: 12px;
+				padding: 1.25rem;
+				margin: 1.5rem 0;
+			}
+			.takeaway-label {
+				font-size: 11px;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				color: var(--warning);
+				margin-bottom: 0.5rem;
+			}
+			.takeaway p {
+				font-size: 14px;
+				color: var(--text-dark);
+			}
+
+			/* ── Resources ── */
+			.resources {
+				margin-top: 2rem;
+			}
+			.resource-item {
+				display: flex;
+				gap: 0.75rem;
+				align-items: flex-start;
+				padding: 0.75rem 1rem;
+				border-radius: 8px;
+				text-decoration: none;
+				color: inherit;
+				transition: background 0.15s;
+				border: 1px solid transparent;
+			}
+			.resource-item:hover {
+				background: var(--primary-50);
+				border-color: var(--primary-100);
+			}
+			.resource-icon {
+				width: 36px;
+				height: 36px;
+				border-radius: 8px;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-shrink: 0;
+				font-size: 16px;
+			}
+			.resource-icon.video {
+				background: var(--danger-light);
+				color: var(--danger);
+			}
+			.resource-icon.article {
+				background: var(--primary-50);
+				color: var(--primary);
+			}
+			.resource-icon.tutorial {
+				background: var(--success-light);
+				color: var(--success);
+			}
+			.resource-title {
+				font-size: 14px;
+				font-weight: 500;
+				color: var(--primary);
+			}
+			.resource-desc {
+				font-size: 12px;
+				color: var(--text-secondary);
+			}
+
+			/* ── Footer ── */
+			.footer {
+				text-align: center;
+				padding: 2rem 1rem;
+				color: var(--text-tertiary);
+				font-size: 12px;
+				border-top: 1px solid var(--border);
+				margin-top: 2rem;
+			}
+
+			/* ── Tooltip ── */
+			.term {
+				border-bottom: 1.5px dashed var(--primary-200);
+				cursor: help;
+				position: relative;
+			}
+			.term:hover .tooltip {
+				opacity: 1;
+				transform: translateY(0);
+				pointer-events: auto;
+			}
+			.tooltip {
+				position: absolute;
+				bottom: 100%;
+				left: 50%;
+				transform: translateX(-50%) translateY(4px);
+				background: var(--primary-dark);
+				color: var(--primary-foreground);
+				font-size: 12px;
+				padding: 0.5rem 0.75rem;
+				border-radius: 6px;
+				white-space: nowrap;
+				max-width: 280px;
+				white-space: normal;
+				opacity: 0;
+				pointer-events: none;
+				transition: all 0.15s;
+				z-index: 10;
+				line-height: 1.4;
+				margin-bottom: 6px;
+			}
+			.tooltip::after {
+				content: "";
+				position: absolute;
+				top: 100%;
+				left: 50%;
+				transform: translateX(-50%);
+				border: 5px solid transparent;
+				border-top-color: var(--primary-dark);
+			}
+
+			/* ── Quiz ── */
+			.quiz {
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: 12px;
+				padding: 1.5rem;
+				margin: 1.5rem 0;
+			}
+			.quiz h3 {
+				font-size: 16px;
+				font-weight: 600;
+				color: var(--text-dark);
+				margin-bottom: 0.25rem;
+			}
+			.quiz p.quiz-intro {
+				font-size: 13px;
+				color: var(--text-secondary);
+				margin-bottom: 1rem;
+			}
+			.quiz-question {
+				margin-bottom: 1.25rem;
+			}
+			.quiz-question p {
+				font-size: 14px;
+				font-weight: 500;
+				color: var(--text-dark);
+				margin-bottom: 0.5rem;
+			}
+			.quiz-options {
+				display: flex;
+				flex-direction: column;
+				gap: 0.4rem;
+			}
+			.quiz-option {
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.5rem 0.75rem;
+				border: 2px solid var(--border-light);
+				border-radius: 8px;
+				cursor: pointer;
+				font-size: 13px;
+				transition: all 0.15s;
+				background: #fff;
+			}
+			.quiz-option:hover {
+				border-color: var(--primary-200);
+				background: var(--primary-50);
+			}
+			.quiz-option.selected {
+				border-color: var(--primary);
+				background: var(--primary-50);
+				color: var(--primary);
+				font-weight: 500;
+			}
+			.quiz-option.correct {
+				border-color: var(--success);
+				background: var(--success-light);
+				color: var(--success);
+				font-weight: 500;
+			}
+			.quiz-option.incorrect {
+				border-color: var(--danger);
+				background: var(--danger-light);
+				color: var(--danger);
+				font-weight: 500;
+			}
+			.quiz-radio {
+				width: 16px;
+				height: 16px;
+				border-radius: 50%;
+				border: 2px solid var(--border-subtle);
+				flex-shrink: 0;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				transition: all 0.15s;
+			}
+			.quiz-option.selected .quiz-radio {
+				border-color: var(--primary);
+				background: var(--primary);
+			}
+			.quiz-option.selected .quiz-radio::after {
+				content: "";
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: white;
+			}
+			.quiz-option.correct .quiz-radio {
+				border-color: var(--success);
+				background: var(--success);
+			}
+			.quiz-option.correct .quiz-radio::after {
+				content: "";
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: white;
+			}
+			.quiz-option.incorrect .quiz-radio {
+				border-color: var(--danger);
+				background: var(--danger);
+			}
+			.quiz-option.incorrect .quiz-radio::after {
+				content: "";
+				width: 6px;
+				height: 6px;
+				border-radius: 50%;
+				background: white;
+			}
+			.quiz-feedback {
+				font-size: 13px;
+				padding: 0.5rem 0.75rem;
+				border-radius: 6px;
+				margin-top: 0.5rem;
+				display: none;
+			}
+			.quiz-feedback.show {
+				display: block;
+			}
+			.quiz-feedback.correct-fb {
+				background: var(--success-light);
+				color: var(--success);
+			}
+			.quiz-feedback.incorrect-fb {
+				background: var(--danger-light);
+				color: var(--danger);
+			}
+			.quiz-btn {
+				background: var(--primary);
+				color: white;
+				border: none;
+				padding: 0.6rem 1.5rem;
+				border-radius: 8px;
+				font-size: 14px;
+				font-weight: 500;
+				cursor: pointer;
+				transition: background 0.15s;
+				font-family: inherit;
+			}
+			.quiz-btn:hover {
+				background: var(--primary-light);
+			}
+			.quiz-btn:disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+			.quiz-score {
+				display: none;
+				padding: 1rem;
+				border-radius: 8px;
+				text-align: center;
+				font-weight: 600;
+				margin-top: 1rem;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- Hero -->
+		<header class="hero">
+			<div class="hero-inner">
+				<div class="hero-badge">Briefing · Connected Products</div>
+				<h1>Waarom je opdrachtgever een ontologie nodig heeft</h1>
+				<p>
+					Hoe je machinedata omzet in slimme beslissingen — en wat AI daarmee te
+					maken heeft.
+				</p>
+			</div>
+		</header>
+
+		<main class="main">
+			<!-- Section 1: Het probleem -->
+			<section class="section">
+				<div class="section-number">1</div>
+				<h2>De data is er al — het begrip ontbreekt</h2>
+				<p class="section-lead">
+					Jullie opdrachtgever heeft machines bij klanten staan die continu data
+					delen. Maar ruwe data alleen is niet genoeg.
+				</p>
+
+				<p>
+					Stel je voor: een machine stuurt elke seconde honderden datapunten
+					door — temperatuur, trillingen, foutcodes, draaiuren. Die data komt
+					binnen als eindeloze rijen getallen in een database. Een mens kan daar
+					niet zomaar iets nuttigs uithalen. En een AI-systeem ook niet — tenzij
+					het <em>begrijpt</em> wat die data betekent.
+				</p>
+
+				<div class="analogy">
+					<div class="analogy-label">💡 Vergelijking</div>
+					<p>
+						Denk aan een nieuw personeelslid op zijn eerste werkdag. Je geeft
+						hem een stapel dossiers, maar zonder uitleg over wie de klanten
+						zijn, hoe de processen werken, en welke afkortingen jullie intern
+						gebruiken. Hij heeft alle informatie — maar kan er niets mee. Zo
+						werkt het ook met AI en ruwe machinedata.
+					</p>
+				</div>
+
+				<p>
+					Hier komt het concept <strong>ontologie</strong> om de hoek kijken.
+				</p>
+			</section>
+
+			<!-- Section 2: Wat is een ontologie? -->
+			<section class="section">
+				<div class="section-number">2</div>
+				<h2>Wat is een ontologie?</h2>
+				<p class="section-lead">
+					Geen filosofie, maar een praktisch hulpmiddel om data betekenis te
+					geven.
+				</p>
+
+				<p>
+					Een ontologie is een gestructureerd model dat beschrijft welke
+					<em>dingen</em> er in jouw bedrijfsdomein bestaan, welke
+					<em>eigenschappen</em> ze hebben, en hoe ze met elkaar
+					<em>samenhangen</em>. Het is in feite de "woordenlijst plus
+					spelregels" van je bedrijf — maar dan zo opgeschreven dat ook een
+					computer het snapt.
+				</p>
+
+				<p>
+					In de context van jullie opdrachtgever zou een ontologie bijvoorbeeld
+					beschrijven:
+				</p>
+
+				<div class="ontology-diagram">
+					<div class="diagram-title">
+						Voorbeeld: Ontologie voor Connected Machines
+					</div>
+					<svg
+						class="diagram-svg"
+						viewBox="0 0 620 340"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<!-- Nodes -->
+						<!-- Machine -->
+						<rect
+							x="230"
+							y="10"
+							width="160"
+							height="52"
+							rx="10"
+							fill="#1e3a5f"
+						/>
+						<text
+							x="310"
+							y="41"
+							text-anchor="middle"
+							fill="white"
+							font-family="Inter,sans-serif"
+							font-size="14"
+							font-weight="600"
+						>
+							Machine
+						</text>
+
+						<!-- Klant -->
+						<rect
+							x="10"
+							y="130"
+							width="140"
+							height="52"
+							rx="10"
+							fill="#f0f5fa"
+							stroke="#1e3a5f"
+							stroke-width="1.5"
+						/>
+						<text
+							x="80"
+							y="161"
+							text-anchor="middle"
+							fill="#1e3a5f"
+							font-family="Inter,sans-serif"
+							font-size="14"
+							font-weight="600"
+						>
+							Klant
+						</text>
+
+						<!-- Onderdeel -->
+						<rect
+							x="240"
+							y="130"
+							width="140"
+							height="52"
+							rx="10"
+							fill="#f0f5fa"
+							stroke="#1e3a5f"
+							stroke-width="1.5"
+						/>
+						<text
+							x="310"
+							y="161"
+							text-anchor="middle"
+							fill="#1e3a5f"
+							font-family="Inter,sans-serif"
+							font-size="14"
+							font-weight="600"
+						>
+							Onderdeel
+						</text>
+
+						<!-- Sensor -->
+						<rect
+							x="470"
+							y="130"
+							width="140"
+							height="52"
+							rx="10"
+							fill="#f0f5fa"
+							stroke="#1e3a5f"
+							stroke-width="1.5"
+						/>
+						<text
+							x="540"
+							y="161"
+							text-anchor="middle"
+							fill="#1e3a5f"
+							font-family="Inter,sans-serif"
+							font-size="14"
+							font-weight="600"
+						>
+							Sensor
+						</text>
+
+						<!-- Storing -->
+						<rect
+							x="80"
+							y="260"
+							width="140"
+							height="52"
+							rx="10"
+							fill="#fee2e2"
+							stroke="#dc2626"
+							stroke-width="1.5"
+						/>
+						<text
+							x="150"
+							y="291"
+							text-anchor="middle"
+							fill="#dc2626"
+							font-family="Inter,sans-serif"
+							font-size="14"
+							font-weight="600"
+						>
+							Storing
+						</text>
+
+						<!-- Onderhoudsbeurt -->
+						<rect
+							x="310"
+							y="260"
+							width="170"
+							height="52"
+							rx="10"
+							fill="#dcfce7"
+							stroke="#16a34a"
+							stroke-width="1.5"
+						/>
+						<text
+							x="395"
+							y="291"
+							text-anchor="middle"
+							fill="#16a34a"
+							font-family="Inter,sans-serif"
+							font-size="14"
+							font-weight="600"
+						>
+							Onderhoudsbeurt
+						</text>
+
+						<!-- Edges -->
+						<!-- Machine → Klant -->
+						<line
+							x1="260"
+							y1="62"
+							x2="120"
+							y2="130"
+							stroke="#b5cce6"
+							stroke-width="1.5"
+						/>
+						<text
+							x="170"
+							y="90"
+							fill="#64748b"
+							font-family="Inter,sans-serif"
+							font-size="11"
+							text-anchor="middle"
+						>
+							staat bij
+						</text>
+
+						<!-- Machine → Onderdeel -->
+						<line
+							x1="310"
+							y1="62"
+							x2="310"
+							y2="130"
+							stroke="#b5cce6"
+							stroke-width="1.5"
+						/>
+						<text
+							x="340"
+							y="100"
+							fill="#64748b"
+							font-family="Inter,sans-serif"
+							font-size="11"
+							text-anchor="start"
+						>
+							bevat
+						</text>
+
+						<!-- Machine → Sensor -->
+						<line
+							x1="360"
+							y1="62"
+							x2="500"
+							y2="130"
+							stroke="#b5cce6"
+							stroke-width="1.5"
+						/>
+						<text
+							x="450"
+							y="90"
+							fill="#64748b"
+							font-family="Inter,sans-serif"
+							font-size="11"
+							text-anchor="middle"
+						>
+							meet via
+						</text>
+
+						<!-- Onderdeel → Storing -->
+						<line
+							x1="280"
+							y1="182"
+							x2="190"
+							y2="260"
+							stroke="#b5cce6"
+							stroke-width="1.5"
+						/>
+						<text
+							x="215"
+							y="220"
+							fill="#64748b"
+							font-family="Inter,sans-serif"
+							font-size="11"
+							text-anchor="middle"
+						>
+							kan hebben
+						</text>
+
+						<!-- Onderdeel → Onderhoudsbeurt -->
+						<line
+							x1="340"
+							y1="182"
+							x2="375"
+							y2="260"
+							stroke="#b5cce6"
+							stroke-width="1.5"
+						/>
+						<text
+							x="384"
+							y="220"
+							fill="#64748b"
+							font-family="Inter,sans-serif"
+							font-size="11"
+							text-anchor="start"
+						>
+							vraagt om
+						</text>
+
+						<!-- Sensor → Storing (detect) -->
+						<line
+							x1="500"
+							y1="182"
+							x2="210"
+							y2="270"
+							stroke="#b5cce6"
+							stroke-width="1.5"
+							stroke-dasharray="5,4"
+						/>
+						<text
+							x="380"
+							y="236"
+							fill="#64748b"
+							font-family="Inter,sans-serif"
+							font-size="11"
+							text-anchor="middle"
+						>
+							detecteert
+						</text>
+					</svg>
+				</div>
+
+				<p>
+					Dit diagram toont de kernelementen en hun relaties. Een
+					<strong>Machine</strong> staat bij een <strong>Klant</strong>, bevat
+					<strong>Onderdelen</strong>, en wordt gemonitord door
+					<strong>Sensoren</strong>. Onderdelen kunnen
+					<strong>Storingen</strong> hebben en vragen om
+					<strong>Onderhoudsbeurten</strong>. Die structuur — met al die
+					verbanden — dát is de ontologie.
+				</p>
+			</section>
+
+			<!-- Section 3: Waarom maakt dit het verschil? -->
+			<section class="section">
+				<div class="section-number">3</div>
+				<h2>Wat verandert er met een ontologie?</h2>
+				<p class="section-lead">
+					Het verschil tussen "data hebben" en "data begrijpen".
+				</p>
+
+				<div class="compare-grid">
+					<div class="compare-card without">
+						<h4>Zonder ontologie</h4>
+						<ul>
+							<li>Data zit verspreid in losse systemen</li>
+							<li>Iedereen gebruikt eigen definities</li>
+							<li>AI krijgt losse getallen zonder context</li>
+							<li>Reactief: pas actie na een storing</li>
+							<li>Kennis zit in hoofden van technici</li>
+						</ul>
+					</div>
+					<div class="compare-card with">
+						<h4>Met ontologie</h4>
+						<ul>
+							<li>Alle data is verbonden en vindbaar</li>
+							<li>Eén gemeenschappelijke "taal"</li>
+							<li>AI begrijpt wát de data betekent</li>
+							<li>Proactief: voorspel en voorkom storingen</li>
+							<li>Kennis is vastgelegd en herbruikbaar</li>
+						</ul>
+					</div>
+				</div>
+			</section>
+
+			<!-- Section 4: De lagen -->
+			<section class="section">
+				<div class="section-number">4</div>
+				<h2>Van data naar beslissing — de drie lagen</h2>
+				<p class="section-lead">
+					Klik op een laag om te zien wat er op dat niveau gebeurt.
+				</p>
+
+				<div class="layers-stack">
+					<div class="layer" onclick="toggleLayer(this)">
+						<div class="layer-tag">Laag 3 · Bovenaan</div>
+						<div class="layer-name">🤖 AI &amp; Beslissingen</div>
+						<div class="layer-desc">
+							AI-agents en dashboards die de ontologie "lezen" en op basis
+							daarvan aanbevelingen doen. Bijvoorbeeld: "Machine #42 bij klant X
+							heeft een verhoogd risico op storing binnen 14 dagen — plan
+							onderhoud in." Dit is waar de waarde voor de klant zit: maximale
+							uptime.
+						</div>
+						<div class="layer-icon">▾</div>
+					</div>
+					<div class="layer" onclick="toggleLayer(this)">
+						<div class="layer-tag">Laag 2 · Midden</div>
+						<div class="layer-name">🧠 De Ontologie</div>
+						<div class="layer-desc">
+							De semantische laag die alle data van betekenis voorziet. Hier
+							worden machines, onderdelen, sensoren, storingen en klanten als
+							objecten gedefinieerd — inclusief hun relaties en regels. Dit is
+							de "digitale tweeling" van de fysieke werkelijkheid. Zonder deze
+							laag is AI blind.
+						</div>
+						<div class="layer-icon">▾</div>
+					</div>
+					<div class="layer" onclick="toggleLayer(this)">
+						<div class="layer-tag">Laag 1 · Onderaan</div>
+						<div class="layer-name">📊 Ruwe Data</div>
+						<div class="layer-desc">
+							Sensorwaarden, logbestanden, storingsmeldingen, onderhoudshistorie
+							— alles wat de machines continu doorsturen. Dit is de grondstof,
+							maar op zichzelf onbruikbaar voor intelligente beslissingen.
+						</div>
+						<div class="layer-icon">▾</div>
+					</div>
+				</div>
+
+				<div class="takeaway">
+					<div class="takeaway-label">🔑 Kernpunt</div>
+					<p>
+						Palantir-oprichter Peter Wilczynski verwoordde het scherp:
+						<em
+							>"Het realiseren van operationele AI in een bedrijfscontext is
+							geen AI-probleem — het is een ontologie-probleem."</em
+						>
+						De kracht van AI hangt af van hoe goed je bedrijfskennis is
+						gestructureerd.
+					</p>
+				</div>
+			</section>
+
+			<!-- Section 5: Scenario -->
+			<section class="section">
+				<div class="section-number">5</div>
+				<h2>Hoe werkt dit in de praktijk?</h2>
+				<p class="section-lead">
+					Een concreet scenario: van sensordata naar proactief onderhoud.
+				</p>
+
+				<div class="scenario-steps">
+					<div class="scenario-step">
+						<div class="step-dot-col">
+							<div class="step-dot active">1</div>
+							<div class="step-line"></div>
+						</div>
+						<div class="step-content">
+							<h4>Sensor registreert afwijking</h4>
+							<p>
+								De trillingssensor van machine #42 bij klant Janssen B.V. meet
+								een ongewoon patroon — temperatuur loopt op, trillingen nemen
+								toe.
+							</p>
+						</div>
+					</div>
+					<div class="scenario-step">
+						<div class="step-dot-col">
+							<div class="step-dot active">2</div>
+							<div class="step-line"></div>
+						</div>
+						<div class="step-content">
+							<h4>Ontologie geeft context</h4>
+							<p>
+								Het systeem weet dankzij de ontologie: deze sensor zit op het
+								lagerblok (onderdeel), dat lagerblok is 14 maanden oud, en
+								vergelijkbare machines hadden bij dit patroon na ~3 weken een
+								storing.
+							</p>
+						</div>
+					</div>
+					<div class="scenario-step">
+						<div class="step-dot-col">
+							<div class="step-dot active">3</div>
+							<div class="step-line"></div>
+						</div>
+						<div class="step-content">
+							<h4>AI doet een voorspelling</h4>
+							<p>
+								Op basis van de gestructureerde kennis (niet alleen de ruwe
+								getallen) voorspelt het AI-model: "80% kans op lagerfalen binnen
+								18 dagen."
+							</p>
+						</div>
+					</div>
+					<div class="scenario-step">
+						<div class="step-dot-col">
+							<div class="step-dot active">4</div>
+							<div class="step-line"></div>
+						</div>
+						<div class="step-content">
+							<h4>Actie wordt voorgesteld</h4>
+							<p>
+								Het systeem stelt voor: plan een preventief onderhoud bij
+								Janssen B.V. volgende week dinsdag. Het reserveonderdeel is op
+								voorraad.
+							</p>
+						</div>
+					</div>
+					<div class="scenario-step">
+						<div class="step-dot-col">
+							<div class="step-dot active">5</div>
+							<div class="step-line"></div>
+						</div>
+						<div class="step-content">
+							<h4>Klant ervaart maximale uptime</h4>
+							<p>
+								De machine stopt niet onverwacht. De klant merkt niets — en dat
+								is precies het doel.
+							</p>
+						</div>
+					</div>
+				</div>
+
+				<p>
+					Zonder de ontologie zou stap 2 ontbreken. De AI zou alleen losse
+					sensorwaarden zien, zonder te weten bij welke machine, welk onderdeel,
+					welke klant, of welke onderhoudshistorie die data hoort. De
+					voorspelling zou veel minder betrouwbaar zijn — of helemaal niet
+					mogelijk.
+				</p>
+			</section>
+
+			<!-- Section 6: Embedded ontology -->
+			<section class="section">
+				<div class="section-number">6</div>
+				<h2>Wat betekent "embedded" ontologie?</h2>
+				<p class="section-lead">
+					Het verschil tussen een ontologie als los document en als ingebouwd
+					onderdeel van je systeem.
+				</p>
+
+				<p>
+					Het woord <strong>embedded</strong> betekent hier: de ontologie zit
+					niet in een apart boekje of document, maar is
+					<em>ingebouwd in de software en systemen</em> die de data verwerken.
+					Elke keer dat data binnenkomt van een machine, wordt die automatisch
+					gekoppeld aan de juiste objecten, relaties en regels.
+				</p>
+
+				<div class="analogy">
+					<div class="analogy-label">💡 Vergelijking</div>
+					<p>
+						Vergelijk het met de grammatica van een taal. Je kunt een
+						grammaticaboek op de plank hebben liggen (een losse ontologie). Maar
+						het wordt pas krachtig als de grammatica <em>ingebouwd</em> zit in
+						een vertaalmachine — zodat elke zin automatisch correct wordt
+						geïnterpreteerd. Embedded ontologie = de grammatica zit in het
+						systeem zelf.
+					</p>
+				</div>
+
+				<p>
+					Bedrijven als
+					<span class="term"
+						>Palantir<span class="tooltip"
+							>Amerikaans technologiebedrijf dat gespecialiseerd is in
+							data-analyse en AI-platforms voor grote organisaties.</span
+						></span
+					>
+					en Microsoft bouwen hun hele AI-platform rondom dit principe. Bij
+					Palantir heet dit de "Ontology" — de kern van hun Foundry- en
+					AIP-platform. Alle data wordt als objecten gemodelleerd (machines,
+					klanten, onderdelen) en alle AI-toepassingen werken via die objecten.
+					Niet via losse tabellen of spreadsheets.
+				</p>
+			</section>
+
+			<!-- Section 7: Relevantie voor het project -->
+			<section class="section">
+				<div class="section-number">7</div>
+				<h2>Wat betekent dit voor jullie project?</h2>
+				<p class="section-lead">
+					Drie concrete aanbevelingen voor jullie advies aan de opdrachtgever.
+				</p>
+
+				<div class="card">
+					<div class="card-surface">
+						<strong style="color: var(--primary)"
+							>1. Begin met het modelleren van de bedrijfswereld</strong
+						>
+						<p
+							style="
+								margin-top: 0.25rem;
+								font-size: 13px;
+								color: var(--text-secondary);
+							"
+						>
+							Voordat je nadenkt over AI, moet je eerst beschrijven wát er
+							bestaat: welke machines, onderdelen, klanten, storingen, en hoe
+							die met elkaar samenhangen. Dit is het fundament.
+						</p>
+					</div>
+					<div class="card-surface">
+						<strong style="color: var(--primary)"
+							>2. Denk in objecten, niet in tabellen</strong
+						>
+						<p
+							style="
+								margin-top: 0.25rem;
+								font-size: 13px;
+								color: var(--text-secondary);
+							"
+						>
+							De opdrachtgever zou data niet als losse spreadsheets moeten
+							behandelen, maar als samenhangende objecten met relaties. Dit
+							maakt de data bruikbaar voor zowel mensen als AI.
+						</p>
+					</div>
+					<div class="card-surface">
+						<strong style="color: var(--primary)"
+							>3. Ontologie als strategisch voordeel</strong
+						>
+						<p
+							style="
+								margin-top: 0.25rem;
+								font-size: 13px;
+								color: var(--text-secondary);
+							"
+						>
+							Een goed opgebouwde ontologie is herbruikbaar en schaalbaar. Als
+							de opdrachtgever meer machines plaatst of nieuwe diensten
+							aanbiedt, groeit de ontologie mee. Het is een investering die zich
+							terugbetaalt.
+						</p>
+					</div>
+				</div>
+
+				<div class="takeaway">
+					<div class="takeaway-label">🎯 Onthoud</div>
+					<p>
+						In het agentic AI-tijdperk draait concurrentievoordeel niet om wie
+						de meeste data heeft, maar om wie de data het beste
+						<em>begrijpt</em>. Ontologie is het verschil tussen een slimme
+						organisatie en een organisatie met veel data.
+					</p>
+				</div>
+			</section>
+
+			<!-- Quiz -->
+			<section class="section">
+				<div class="quiz" id="quiz">
+					<h3>Check je begrip</h3>
+					<p class="quiz-intro">
+						Drie korte vragen om te kijken of de kernconcepten zijn geland.
+					</p>
+
+					<div class="quiz-question" data-correct="1">
+						<p>1. Wat beschrijft een ontologie?</p>
+						<div class="quiz-options">
+							<div
+								class="quiz-option"
+								data-idx="0"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span>Alleen de data die sensoren verzamelen</span>
+							</div>
+							<div
+								class="quiz-option"
+								data-idx="1"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span
+									>De objecten, eigenschappen en relaties in een
+									bedrijfsdomein</span
+								>
+							</div>
+							<div
+								class="quiz-option"
+								data-idx="2"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span>Het AI-model dat voorspellingen doet</span>
+							</div>
+						</div>
+						<div class="quiz-feedback"></div>
+					</div>
+
+					<div class="quiz-question" data-correct="2">
+						<p>2. Waarom heeft AI een ontologie nodig?</p>
+						<div class="quiz-options">
+							<div
+								class="quiz-option"
+								data-idx="0"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span>Om sneller data te downloaden</span>
+							</div>
+							<div
+								class="quiz-option"
+								data-idx="1"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span>Om de opdrachtgever te overtuigen</span>
+							</div>
+							<div
+								class="quiz-option"
+								data-idx="2"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span
+									>Om te begrijpen wat de data betekent en hoe dingen
+									samenhangen</span
+								>
+							</div>
+						</div>
+						<div class="quiz-feedback"></div>
+					</div>
+
+					<div class="quiz-question" data-correct="1">
+						<p>3. Wat betekent "embedded" in embedded ontologie?</p>
+						<div class="quiz-options">
+							<div
+								class="quiz-option"
+								data-idx="0"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span>De ontologie staat in een apart PDF-document</span>
+							</div>
+							<div
+								class="quiz-option"
+								data-idx="1"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span
+									>De ontologie is ingebouwd in de software die de data
+									verwerkt</span
+								>
+							</div>
+							<div
+								class="quiz-option"
+								data-idx="2"
+								onclick="selectOption(this)"
+							>
+								<div class="quiz-radio"></div>
+								<span>De ontologie is alleen zichtbaar voor ontwikkelaars</span>
+							</div>
+						</div>
+						<div class="quiz-feedback"></div>
+					</div>
+
+					<button class="quiz-btn" onclick="checkQuiz()" id="quizBtn">
+						Controleer antwoorden
+					</button>
+					<div class="quiz-score" id="quizScore"></div>
+				</div>
+			</section>
+
+			<!-- Resources -->
+			<section class="section resources">
+				<div class="section-number">📚</div>
+				<h2>Verder lezen &amp; kijken</h2>
+				<p class="section-lead">
+					De bronnen die als basis dienden voor deze briefing.
+				</p>
+
+				<a
+					href="https://youtu.be/yLD5I16XkOo?si=oxz-EA1QmhkPg0b9"
+					target="_blank"
+					rel="noopener"
+					class="resource-item"
+				>
+					<div class="resource-icon video">▶</div>
+					<div>
+						<div class="resource-title">
+							Video: Embedded Ontology — introductie
+						</div>
+						<div class="resource-desc">
+							YouTube · Uitleg over het concept embedded ontologie in de context
+							van connected products.
+						</div>
+					</div>
+				</a>
+				<a
+					href="https://youtu.be/YDAxITCNcko?si=Y_vU-yCjokNHMb2w"
+					target="_blank"
+					rel="noopener"
+					class="resource-item"
+				>
+					<div class="resource-icon video">▶</div>
+					<div>
+						<div class="resource-title">
+							Video: Het ontologie-systeem uitgelegd
+						</div>
+						<div class="resource-desc">
+							YouTube · Verdieping in hoe een ontologiesysteem werkt en waarom
+							het relevant is.
+						</div>
+					</div>
+				</a>
+				<a
+					href="https://businessdatasolutions.github.io/thtx-knowledge-bank/ontology-ai-tutor/"
+					target="_blank"
+					rel="noopener"
+					class="resource-item"
+				>
+					<div class="resource-icon tutorial">⚡</div>
+					<div>
+						<div class="resource-title">
+							Interactieve tutorial: Ontology AI Tutor
+						</div>
+						<div class="resource-desc">
+							Zelfgemaakte tutorial · Leer stap voor stap hoe ontologie en AI
+							samenhangen.
+						</div>
+					</div>
+				</a>
+				<a
+					href="https://blog.palantir.com/connecting-ai-to-decisions-with-the-palantir-ontology-c73f7b0a1a72"
+					target="_blank"
+					rel="noopener"
+					class="resource-item"
+				>
+					<div class="resource-icon article">📄</div>
+					<div>
+						<div class="resource-title">
+							Palantir Blog: Connecting AI to Decisions
+						</div>
+						<div class="resource-desc">
+							Palantir · Hoe Palantir's Ontology data, logica en acties verbindt
+							voor besluitvorming.
+						</div>
+					</div>
+				</a>
+				<a
+					href="https://medium.com/@jainprian/why-ontologies-are-your-secret-weapon-in-the-agentic-ai-era-e43fa91ad5c2"
+					target="_blank"
+					rel="noopener"
+					class="resource-item"
+				>
+					<div class="resource-icon article">📄</div>
+					<div>
+						<div class="resource-title">
+							Medium: Why Ontologies Are Your Secret Weapon
+						</div>
+						<div class="resource-desc">
+							Priyanka Jain · Waarom ontologieën essentieel zijn in het tijdperk
+							van agentic AI.
+						</div>
+					</div>
+				</a>
+			</section>
+		</main>
+
+		<footer class="footer">
+			Briefing samengesteld voor het Connected Products-project · HBO
+			Bedrijfskunde
+		</footer>
+
+		<script>
+			// Layer toggle
+			function toggleLayer(el) {
+				const wasActive = el.classList.contains("active");
+				document
+					.querySelectorAll(".layer")
+					.forEach((l) => l.classList.remove("active"));
+				if (!wasActive) el.classList.add("active");
+			}
+
+			// Quiz
+			function selectOption(el) {
+				const question = el.closest(".quiz-question");
+				if (question.classList.contains("answered")) return;
+				question
+					.querySelectorAll(".quiz-option")
+					.forEach((o) => o.classList.remove("selected"));
+				el.classList.add("selected");
+			}
+
+			function checkQuiz() {
+				const questions = document.querySelectorAll(".quiz-question");
+				let score = 0;
+				let allAnswered = true;
+
+				questions.forEach((q) => {
+					const selected = q.querySelector(".quiz-option.selected");
+					if (!selected) {
+						allAnswered = false;
+						return;
+					}
+
+					const correct = parseInt(q.dataset.correct);
+					const chosen = parseInt(selected.dataset.idx);
+					const feedback = q.querySelector(".quiz-feedback");
+
+					q.classList.add("answered");
+					q.querySelectorAll(".quiz-option").forEach(
+						(o) => (o.style.pointerEvents = "none"),
+					);
+
+					if (chosen === correct) {
+						selected.classList.remove("selected");
+						selected.classList.add("correct");
+						feedback.textContent = "Goed!";
+						feedback.className = "quiz-feedback show correct-fb";
+						score++;
+					} else {
+						selected.classList.remove("selected");
+						selected.classList.add("incorrect");
+						const correctOption = q.querySelectorAll(".quiz-option")[correct];
+						correctOption.classList.add("correct");
+						feedback.textContent =
+							"Niet helemaal — bekijk het juiste antwoord hierboven.";
+						feedback.className = "quiz-feedback show incorrect-fb";
+					}
+				});
+
+				if (!allAnswered) {
+					alert("Beantwoord eerst alle vragen.");
+					return;
+				}
+
+				const scoreEl = document.getElementById("quizScore");
+				scoreEl.style.display = "block";
+				if (score === 3) {
+					scoreEl.style.background = "var(--success-light)";
+					scoreEl.style.color = "var(--success)";
+					scoreEl.textContent = `${score}/3 — Uitstekend! De kernconcepten zijn helder.`;
+				} else if (score >= 2) {
+					scoreEl.style.background = "var(--warning-light)";
+					scoreEl.style.color = "var(--warning)";
+					scoreEl.textContent = `${score}/3 — Goed op weg. Lees de briefing nog eens door voor het concept dat je miste.`;
+				} else {
+					scoreEl.style.background = "var(--danger-light)";
+					scoreEl.style.color = "var(--danger)";
+					scoreEl.textContent = `${score}/3 — Neem de briefing nog eens rustig door en kijk de bronnen.`;
+				}
+
+				document.getElementById("quizBtn").disabled = true;
+			}
+		</script>
+	</body>
+</html>
