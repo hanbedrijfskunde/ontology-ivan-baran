@@ -676,6 +676,702 @@
 				font-weight: 600;
 				margin-top: 1rem;
 			}
+
+			/* ── Simulation Section 8 ── */
+			.sim-intro {
+				text-align: center;
+				margin-bottom: 1.5rem;
+			}
+			.sim-intro p {
+				color: var(--text-secondary);
+				font-size: 14px;
+				margin-bottom: 1.25rem;
+			}
+
+			/* Progress indicator */
+			.sim-progress {
+				display: flex;
+				align-items: flex-start;
+				justify-content: center;
+				gap: 0;
+				margin-bottom: 2rem;
+			}
+			.sim-progress-phase {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 0.35rem;
+			}
+			.sim-progress-phase-label {
+				font-size: 10px;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 1px;
+				color: var(--text-tertiary);
+				white-space: nowrap;
+			}
+			.sim-progress-dots {
+				display: flex;
+				align-items: center;
+				gap: 0;
+			}
+			.sim-dot {
+				width: 28px;
+				height: 28px;
+				border-radius: 50%;
+				background: var(--border);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-size: 12px;
+				font-weight: 600;
+				color: var(--text-tertiary);
+				transition: all 0.4s ease;
+				flex-shrink: 0;
+			}
+			.sim-dot.active {
+				background: var(--primary);
+				color: #fff;
+				box-shadow: 0 0 0 4px rgba(30, 58, 95, 0.15);
+			}
+			.sim-dot.completed {
+				background: var(--success);
+				color: #fff;
+			}
+			.sim-progress-line {
+				width: 24px;
+				height: 2px;
+				background: var(--border);
+				transition: background 0.4s ease;
+				flex-shrink: 0;
+			}
+			.sim-progress-line.active {
+				background: var(--success);
+			}
+			.sim-progress-sep {
+				width: 20px;
+				height: 2px;
+				border-top: 2px dashed var(--border-subtle);
+				margin: 0 4px;
+				flex-shrink: 0;
+				align-self: center;
+				margin-top: 22px;
+			}
+
+			/* Start / Reset buttons */
+			.sim-start-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.5rem;
+				padding: 0.75rem 2rem;
+				background: var(--primary);
+				color: #fff;
+				border: none;
+				border-radius: 8px;
+				font-size: 15px;
+				font-weight: 600;
+				cursor: pointer;
+				transition: background 0.2s;
+			}
+			.sim-start-btn:hover {
+				background: var(--primary-light);
+			}
+			.sim-start-btn:disabled {
+				opacity: 0.5;
+				cursor: not-allowed;
+			}
+			.sim-reset-btn {
+				display: none;
+				margin: 1.5rem auto 0;
+				padding: 0.6rem 1.5rem;
+				background: transparent;
+				color: var(--text-secondary);
+				border: 1px solid var(--border);
+				border-radius: 8px;
+				font-size: 13px;
+				font-weight: 500;
+				cursor: pointer;
+				transition: all 0.2s;
+			}
+			.sim-reset-btn:hover {
+				background: var(--surface);
+				border-color: var(--border-subtle);
+			}
+
+			/* Step containers */
+			.sim-step {
+				display: none;
+				margin-top: 1.5rem;
+				animation: simFadeIn 0.5s ease;
+			}
+			.sim-step.visible {
+				display: block;
+			}
+			@keyframes simFadeIn {
+				from { opacity: 0; transform: translateY(12px); }
+				to { opacity: 1; transform: translateY(0); }
+			}
+			.sim-step-label {
+				font-size: 11px;
+				font-weight: 600;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				color: var(--text-tertiary);
+				margin-bottom: 0.75rem;
+			}
+			.sim-step-caption {
+				font-size: 13px;
+				color: var(--text-secondary);
+				font-style: italic;
+				margin-top: 0.75rem;
+			}
+
+			/* Step 1: Sensor cards */
+			.sim-sensor-grid {
+				display: grid;
+				grid-template-columns: repeat(3, 1fr);
+				gap: 1rem;
+			}
+			@media (max-width: 560px) {
+				.sim-sensor-grid {
+					grid-template-columns: 1fr;
+				}
+			}
+			.sim-sensor-card {
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: 10px;
+				padding: 1rem;
+				text-align: center;
+				opacity: 0;
+				transform: translateY(8px);
+				transition: all 0.4s ease;
+			}
+			.sim-sensor-card.visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			.sim-sensor-card.warning {
+				border-color: var(--warning);
+				background: var(--warning-light);
+			}
+			.sim-sensor-card.danger {
+				border-color: var(--danger);
+				background: var(--danger-light);
+			}
+			.sim-sensor-id {
+				font-size: 11px;
+				font-weight: 600;
+				color: var(--text-tertiary);
+				font-family: monospace;
+				margin-bottom: 0.5rem;
+			}
+			.sim-sensor-value {
+				font-size: 32px;
+				font-weight: 700;
+				color: var(--text-primary);
+				line-height: 1.2;
+				transition: color 0.3s;
+			}
+			.sim-sensor-card.warning .sim-sensor-value {
+				color: var(--warning);
+			}
+			.sim-sensor-card.danger .sim-sensor-value {
+				color: var(--danger);
+			}
+
+			/* Step 2: Ontology enrichment */
+			.sim-ontology-container {
+				margin: 1rem 0;
+			}
+			.sim-svg-wrap {
+				background: var(--surface);
+				border-radius: 12px;
+				border: 1px solid var(--border);
+				padding: 1rem;
+				margin-bottom: 1rem;
+			}
+			.sim-enrich-compare {
+				display: grid;
+				grid-template-columns: 1fr 1fr;
+				gap: 1rem;
+				margin-top: 1rem;
+			}
+			@media (max-width: 560px) {
+				.sim-enrich-compare {
+					grid-template-columns: 1fr;
+				}
+			}
+			.sim-json-box {
+				border-radius: 10px;
+				padding: 1rem;
+				font-family: monospace;
+				font-size: 12px;
+				line-height: 1.6;
+				white-space: pre-wrap;
+				word-break: break-all;
+				overflow: hidden;
+			}
+			.sim-json-box.raw {
+				background: var(--danger-light);
+				border: 1.5px solid var(--danger);
+				color: var(--danger);
+			}
+			.sim-json-box.enriched {
+				background: var(--success-light);
+				border: 1.5px solid var(--success);
+				color: var(--success);
+			}
+			.sim-json-label {
+				font-family: "Inter", sans-serif;
+				font-size: 11px;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				margin-bottom: 0.5rem;
+				display: block;
+			}
+
+			/* SVG node highlight */
+			@keyframes simNodePulse {
+				0% { filter: drop-shadow(0 0 0px rgba(30, 58, 95, 0)); }
+				50% { filter: drop-shadow(0 0 8px rgba(30, 58, 95, 0.5)); }
+				100% { filter: drop-shadow(0 0 0px rgba(30, 58, 95, 0)); }
+			}
+			.sim-node-highlight {
+				animation: simNodePulse 1s ease-in-out 2;
+			}
+
+			/* Step 3: Risk analysis */
+			.sim-risk-container {
+				text-align: center;
+				margin: 1rem 0;
+			}
+			.sim-risk-percentage {
+				font-size: 48px;
+				font-weight: 800;
+				color: var(--danger);
+				margin-bottom: 0.5rem;
+			}
+			.sim-risk-label {
+				font-size: 13px;
+				color: var(--text-secondary);
+				margin-bottom: 1rem;
+			}
+			.sim-risk-bar-track {
+				width: 100%;
+				height: 12px;
+				background: var(--bg-light);
+				border-radius: 6px;
+				overflow: hidden;
+				margin-bottom: 1.25rem;
+			}
+			.sim-risk-bar-fill {
+				height: 100%;
+				width: 0%;
+				border-radius: 6px;
+				background: var(--success);
+				transition: width 3s ease-out, background 0.5s;
+			}
+			.sim-risk-factors {
+				text-align: left;
+				list-style: none;
+				padding: 0;
+			}
+			.sim-risk-factors li {
+				padding: 0.5rem 0;
+				padding-left: 1.5rem;
+				position: relative;
+				font-size: 13px;
+				color: var(--text-secondary);
+				border-bottom: 1px solid var(--border);
+				opacity: 0;
+				transform: translateX(-8px);
+				transition: all 0.3s ease;
+			}
+			.sim-risk-factors li.visible {
+				opacity: 1;
+				transform: translateX(0);
+			}
+			.sim-risk-factors li:last-child {
+				border-bottom: none;
+			}
+			.sim-risk-factors li::before {
+				content: "\26A0";
+				position: absolute;
+				left: 0;
+				top: 0.5rem;
+			}
+
+			/* Step 4: Recommendation */
+			.sim-recommendation {
+				background: var(--success-light);
+				border: 1.5px solid var(--success);
+				border-radius: 12px;
+				padding: 1.25rem;
+				opacity: 0;
+				transform: scale(0.95);
+				transition: all 0.5s ease;
+			}
+			.sim-recommendation.visible {
+				opacity: 1;
+				transform: scale(1);
+			}
+			.sim-recommendation h4 {
+				color: var(--success);
+				font-size: 15px;
+				margin-bottom: 0.75rem;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			.sim-rec-grid {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				gap: 0.25rem 1rem;
+				font-size: 13px;
+			}
+			.sim-rec-grid dt {
+				font-weight: 600;
+				color: var(--text-dark);
+			}
+			.sim-rec-grid dd {
+				color: var(--text-secondary);
+			}
+			.sim-rec-saving {
+				margin-top: 0.75rem;
+				padding-top: 0.75rem;
+				border-top: 1px solid rgba(22, 163, 74, 0.2);
+				font-size: 14px;
+				font-weight: 600;
+				color: var(--success);
+			}
+
+			/* Phase separator */
+			.sim-phase-separator {
+				text-align: center;
+				margin: 2rem 0;
+				position: relative;
+			}
+			.sim-phase-separator::before {
+				content: "";
+				position: absolute;
+				top: 50%;
+				left: 0;
+				right: 0;
+				height: 1px;
+				background: var(--border);
+			}
+			.sim-phase-separator span {
+				position: relative;
+				background: #fff;
+				padding: 0.25rem 1rem;
+				font-size: 11px;
+				font-weight: 700;
+				text-transform: uppercase;
+				letter-spacing: 1.5px;
+				color: var(--primary);
+			}
+
+			/* Step 5: Parts list */
+			.sim-parts-list {
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+			}
+			.sim-part-row {
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: 10px;
+				padding: 0.75rem 1rem;
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				gap: 1rem;
+				opacity: 0;
+				transform: translateX(-12px);
+				transition: all 0.4s ease;
+				flex-wrap: wrap;
+			}
+			.sim-part-row.visible {
+				opacity: 1;
+				transform: translateX(0);
+			}
+			.sim-part-row.available {
+				border-color: var(--success);
+			}
+			.sim-part-row.unavailable {
+				border-color: var(--danger);
+			}
+			.sim-part-row.ordered {
+				border-color: var(--warning);
+			}
+			.sim-part-info {
+				flex: 1;
+				min-width: 0;
+			}
+			.sim-part-name {
+				font-size: 14px;
+				font-weight: 600;
+				color: var(--text-dark);
+			}
+			.sim-part-code {
+				font-size: 11px;
+				font-family: monospace;
+				color: var(--text-tertiary);
+			}
+			.sim-part-status {
+				font-size: 12px;
+				font-weight: 600;
+				white-space: nowrap;
+				padding: 0.25rem 0.75rem;
+				border-radius: 20px;
+				transition: all 0.3s;
+			}
+			.sim-part-status.green {
+				background: var(--success-light);
+				color: var(--success);
+			}
+			.sim-part-status.red {
+				background: var(--danger-light);
+				color: var(--danger);
+			}
+			.sim-part-status.orange {
+				background: var(--warning-light);
+				color: var(--warning);
+			}
+			.sim-part-detail {
+				font-size: 11px;
+				color: var(--text-secondary);
+				margin-top: 0.25rem;
+				width: 100%;
+			}
+			.sim-parts-summary {
+				margin-top: 0.75rem;
+				padding: 0.75rem 1rem;
+				background: var(--primary-50);
+				border-radius: 8px;
+				font-size: 13px;
+				font-weight: 600;
+				color: var(--primary);
+				text-align: center;
+				opacity: 0;
+				transition: opacity 0.4s;
+			}
+			.sim-parts-summary.visible {
+				opacity: 1;
+			}
+
+			/* Step 6: Engineers */
+			.sim-engineers {
+				display: flex;
+				flex-direction: column;
+				gap: 0.75rem;
+			}
+			.sim-engineer-card {
+				background: var(--surface);
+				border: 1px solid var(--border);
+				border-radius: 10px;
+				padding: 1rem;
+				display: flex;
+				align-items: flex-start;
+				gap: 1rem;
+				opacity: 0;
+				transform: translateY(8px);
+				transition: all 0.4s ease;
+			}
+			.sim-engineer-card.visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			.sim-engineer-card.best {
+				border-color: var(--success);
+				background: var(--success-light);
+			}
+			.sim-engineer-card.maybe {
+				border-color: var(--warning);
+			}
+			.sim-engineer-card.rejected {
+				border-color: var(--border);
+			}
+			.sim-engineer-card.rejected.visible {
+				opacity: 0.5;
+			}
+			.sim-engineer-card.rejected .sim-engineer-name {
+				text-decoration: line-through;
+			}
+			.sim-engineer-avatar {
+				width: 40px;
+				height: 40px;
+				border-radius: 50%;
+				background: var(--primary-100);
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				font-weight: 700;
+				font-size: 14px;
+				color: var(--primary);
+				flex-shrink: 0;
+			}
+			.sim-engineer-info {
+				flex: 1;
+				min-width: 0;
+			}
+			.sim-engineer-name {
+				font-size: 14px;
+				font-weight: 600;
+				color: var(--text-dark);
+			}
+			.sim-engineer-cert {
+				font-size: 12px;
+				color: var(--text-secondary);
+				margin-top: 0.15rem;
+			}
+			.sim-engineer-schedule {
+				font-size: 12px;
+				color: var(--text-tertiary);
+				margin-top: 0.25rem;
+			}
+			.sim-engineer-badge {
+				font-size: 11px;
+				font-weight: 700;
+				padding: 0.2rem 0.6rem;
+				border-radius: 20px;
+				white-space: nowrap;
+				flex-shrink: 0;
+				align-self: center;
+			}
+			.sim-engineer-badge.best {
+				background: var(--success-light);
+				color: var(--success);
+			}
+			.sim-engineer-badge.maybe {
+				background: var(--warning-light);
+				color: var(--warning);
+			}
+			.sim-engineer-badge.rejected {
+				background: var(--bg-light);
+				color: var(--text-tertiary);
+			}
+			.sim-engineer-confirm {
+				margin-top: 0.75rem;
+				padding: 0.75rem 1rem;
+				background: var(--success-light);
+				border-radius: 8px;
+				font-size: 13px;
+				font-weight: 600;
+				color: var(--success);
+				text-align: center;
+				opacity: 0;
+				transition: opacity 0.4s;
+			}
+			.sim-engineer-confirm.visible {
+				opacity: 1;
+			}
+
+			/* Step 7: Notification */
+			.sim-notification {
+				background: var(--primary-50);
+				border: 1.5px solid var(--primary);
+				border-radius: 12px;
+				overflow: hidden;
+				opacity: 0;
+				transform: translateY(12px);
+				transition: all 0.5s ease;
+			}
+			.sim-notification.visible {
+				opacity: 1;
+				transform: translateY(0);
+			}
+			.sim-notification-header {
+				background: var(--primary);
+				color: #fff;
+				padding: 0.75rem 1rem;
+				font-size: 13px;
+				font-weight: 600;
+				display: flex;
+				align-items: center;
+				gap: 0.5rem;
+			}
+			.sim-notification-body {
+				padding: 1rem;
+				font-size: 13px;
+				color: var(--text-secondary);
+				line-height: 1.7;
+			}
+			.sim-notification-body strong {
+				color: var(--text-dark);
+			}
+			.sim-notification-meta {
+				display: grid;
+				grid-template-columns: auto 1fr;
+				gap: 0.25rem 0.75rem;
+				margin: 0.75rem 0;
+				font-size: 13px;
+			}
+			.sim-notification-footer {
+				border-top: 1px solid var(--primary-100);
+				padding: 0.75rem 1rem;
+				font-size: 12px;
+				color: var(--text-tertiary);
+			}
+
+			/* Timeline summary */
+			.sim-timeline {
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				flex-wrap: wrap;
+				gap: 0;
+				margin-top: 1.5rem;
+				padding: 1rem;
+				background: var(--surface);
+				border-radius: 10px;
+				border: 1px solid var(--border);
+				opacity: 0;
+				transition: opacity 0.5s;
+			}
+			.sim-timeline.visible {
+				opacity: 1;
+			}
+			.sim-timeline-step {
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				gap: 0.2rem;
+				padding: 0.25rem 0.5rem;
+			}
+			.sim-timeline-step span:first-child {
+				font-size: 12px;
+				font-weight: 600;
+				color: var(--text-dark);
+			}
+			.sim-timeline-step span:last-child {
+				font-size: 10px;
+				color: var(--text-tertiary);
+			}
+			.sim-timeline-arrow {
+				color: var(--text-tertiary);
+				font-size: 14px;
+			}
+
+			/* Sending animation */
+			.sim-sending {
+				text-align: center;
+				padding: 2rem;
+				font-size: 14px;
+				color: var(--text-secondary);
+			}
+			.sim-sending-icon {
+				font-size: 32px;
+				animation: simSendPulse 0.75s ease-in-out infinite;
+				display: inline-block;
+				margin-bottom: 0.5rem;
+			}
+			@keyframes simSendPulse {
+				0%, 100% { transform: scale(1); opacity: 1; }
+				50% { transform: scale(1.15); opacity: 0.7; }
+			}
 		</style>
 	</head>
 	<body>
