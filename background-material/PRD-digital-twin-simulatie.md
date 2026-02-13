@@ -223,6 +223,33 @@ Sensordata → Ontologie → Analyse → Aanbeveling → Onderdelen → Monteur 
 
 - Reset-knop verschijnt
 
+### 5.1b Dashboard-layout (split-panel)
+
+Op desktop (≥769px) wordt de simulatie gepresenteerd als een breed dashboard dat uit `<main>` breekt:
+
+```
+┌─────────────────────────────────────────────────────┐
+│           Sectie-header (768px centered)             │
+│    [8] Titel + lead tekst + voortgangsindicator      │
+│              [▶ Start Simulatie]                      │
+├──────────────────────┬──────────────────────────────┤
+│   SVG Ontologie      │   Stap-content               │
+│   Diagram            │   (stappen stapelen op,      │
+│   (sticky, 45%)      │    scrollbaar, 55%)           │
+├──────────────────────┴──────────────────────────────┤
+│           Footer (768px centered)                    │
+│        [↻ Opnieuw starten] + Takeaway-box           │
+└─────────────────────────────────────────────────────┘
+```
+
+- **Diagram links** (`sim-panel-diagram`, sticky): blijft altijd zichtbaar, node-highlights zijn direct te volgen naast de stap-content
+- **Stap-content rechts** (`sim-panel-steps`): stappen stapelen op — eerdere stappen blijven zichtbaar zodat de lezer kan terugkijken
+- **Max-width 1280px** voor het dashboard-grid (`sim-dashboard-body`), met 2rem padding
+- **Achtergrond**: `var(--surface)` met subtiele border-top/bottom om de brede sectie visueel af te scheiden van de smalle `<main>` content
+- Header en footer zijn gecentreerd op 768px voor consistentie met de rest van de pagina
+
+Op mobiel (≤768px) valt het grid terug naar single-column: diagram boven, stappen eronder gestapeld.
+
 ### 5.2 Voortgangsindicator
 
 Horizontale stappenbalk (7 dots met verbindingslijnen), visueel opgedeeld in twee fasen:
@@ -273,6 +300,7 @@ Na de simulatie verschijnt een takeaway-box die het volledige plaatje samenvat: 
 - Alle tekst in het Nederlands
 
 ### 6.3 Responsive Design
+- Dashboard split-panel valt terug naar single-column bij viewport ≤ 768px
 - Sensorcard-grid stacked naar enkelkoloms bij viewport < 560px
 - Verrijkings-vergelijking stacked naar enkelkoloms bij viewport < 560px
 
@@ -299,6 +327,7 @@ De simulatie wordt ingevoegd als **Sectie 8**, tussen de huidige Sectie 7 ("Wat 
 | Drie monteurs met verschillende geschiktheid | Demonstreert hoe de ontologie certificeringen, planning en locatie combineert voor optimale beslissingen. De niet-gecertificeerde monteur die wél in Rotterdam zit toont dat nabijheid alleen niet genoeg is. |
 | 7 stappen in twee fasen (detectie + actie) | Het visuele onderscheid tussen "begrijpen" (stap 1–4) en "handelen" (stap 5–7) maakt het agentic-karakter expliciet. |
 | `innerHTML` voor dynamische content | Veilig in deze context (geen gebruikersinput wordt gerenderd). Houdt de code simpel. |
+| Split-panel dashboard-layout | SVG-diagram sticky links houdt het altijd zichtbaar wanneer stappen 2, 5 en 6 nodes highlighten. Stap-content rechts stapelt op zodat de lezer kan terugkijken. Sectie breekt uit `<main>` voor brede weergave (max 1280px). |
 
 ## 9. Acceptatiecriteria
 

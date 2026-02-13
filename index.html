@@ -1372,6 +1372,135 @@
 				0%, 100% { transform: scale(1); opacity: 1; }
 				50% { transform: scale(1.15); opacity: 0.7; }
 			}
+			/* Dashboard layout for simulation */
+			.sim-dashboard h2 {
+				font-size: 24px;
+				font-weight: 700;
+				color: var(--primary);
+				margin-bottom: 0.5rem;
+			}
+			.sim-dashboard {
+				background: var(--surface);
+				border-top: 1px solid var(--border);
+				border-bottom: 1px solid var(--border);
+				padding: 2rem 0 3rem;
+			}
+			.sim-dashboard-header {
+				max-width: 768px;
+				margin: 0 auto;
+				padding: 0 1rem 1.5rem;
+			}
+			.sim-dashboard-body {
+				display: grid;
+				grid-template-columns: 45fr 55fr;
+				gap: 2rem;
+				max-width: 1280px;
+				margin: 0 auto;
+				padding: 0 2rem;
+				align-items: start;
+			}
+			.sim-panel-diagram {
+				position: sticky;
+				top: 1rem;
+			}
+			.sim-panel-steps {
+				min-height: 400px;
+			}
+			.sim-panel-steps .sim-step { margin-top: 0; }
+			.sim-step-nav {
+				display: flex;
+				align-items: center;
+				justify-content: space-between;
+				margin-bottom: 1rem;
+				gap: 0.5rem;
+			}
+			.sim-step-nav-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35rem;
+				padding: 0.4rem 0.75rem;
+				border: 1px solid var(--border);
+				border-radius: 6px;
+				background: white;
+				color: var(--text-secondary);
+				font-size: 12px;
+				font-family: inherit;
+				cursor: pointer;
+				transition: all 0.2s ease;
+			}
+			.sim-step-nav-btn:hover:not(:disabled) {
+				background: var(--primary-50);
+				border-color: var(--primary-light);
+				color: var(--primary);
+			}
+			.sim-step-nav-btn:disabled {
+				opacity: 0.3;
+				cursor: default;
+			}
+			.sim-step-nav-label {
+				font-size: 12px;
+				color: var(--text-tertiary);
+				font-weight: 500;
+			}
+			.sim-dot.completed { cursor: pointer; }
+			.sim-dot.active { cursor: default; }
+			.sim-pause-hint {
+				background: var(--primary);
+				color: white;
+				border-radius: 10px;
+				padding: 1rem 1.25rem;
+				margin-top: 1rem;
+				display: none;
+				animation: simFadeIn 0.4s ease;
+				position: relative;
+			}
+			.sim-pause-hint::before {
+				content: "";
+				position: absolute;
+				top: -6px;
+				left: 1.5rem;
+				width: 12px;
+				height: 12px;
+				background: var(--primary);
+				transform: rotate(45deg);
+				border-radius: 2px;
+			}
+			.sim-pause-hint p {
+				font-size: 13px;
+				line-height: 1.6;
+				margin-bottom: 0.75rem;
+			}
+			.sim-pause-btn {
+				display: inline-flex;
+				align-items: center;
+				gap: 0.35rem;
+				padding: 0.45rem 1rem;
+				border: 1.5px solid rgba(255,255,255,0.4);
+				border-radius: 6px;
+				background: rgba(255,255,255,0.15);
+				color: white;
+				font-size: 12px;
+				font-weight: 600;
+				font-family: inherit;
+				cursor: pointer;
+				transition: all 0.2s ease;
+			}
+			.sim-pause-btn:hover {
+				background: rgba(255,255,255,0.25);
+				border-color: rgba(255,255,255,0.6);
+			}
+			.sim-dashboard-footer {
+				max-width: 768px;
+				margin: 1.5rem auto 0;
+				padding: 0 1rem;
+			}
+			@media (max-width: 768px) {
+				.sim-dashboard-body {
+					grid-template-columns: 1fr;
+					padding: 0 1rem;
+				}
+				.sim-panel-diagram { position: static; }
+			}
 		</style>
 	</head>
 	<body>
@@ -2023,6 +2152,382 @@
 				</div>
 			</section>
 
+		</main>
+
+		<!-- Section 8: Digital Twin Simulatie (dashboard layout) -->
+		<section class="sim-dashboard" id="sim-section">
+			<div class="sim-dashboard-header">
+				<div class="section-number">8</div>
+				<h2>Ervaar het zelf: de Digital Twin Simulatie</h2>
+				<p class="section-lead">
+					Je hebt gelezen hoe een ontologie werkt. Nu ga je het zien. Klik op
+					de knop en volg hoe het systeem &mdash; van ruwe sensordata tot
+					klantnotificatie &mdash; volledig autonoom handelt.
+				</p>
+
+				<!-- Progress indicator -->
+				<div class="sim-progress" id="simProgress">
+					<div class="sim-progress-phase">
+						<span class="sim-progress-phase-label">Detectie &amp; Analyse</span>
+						<div class="sim-progress-dots">
+							<div class="sim-dot" data-step="1">1</div>
+							<div class="sim-progress-line" data-line="1"></div>
+							<div class="sim-dot" data-step="2">2</div>
+							<div class="sim-progress-line" data-line="2"></div>
+							<div class="sim-dot" data-step="3">3</div>
+							<div class="sim-progress-line" data-line="3"></div>
+							<div class="sim-dot" data-step="4">4</div>
+						</div>
+					</div>
+					<div class="sim-progress-sep"></div>
+					<div class="sim-progress-phase">
+						<span class="sim-progress-phase-label">Agentic AI Actie</span>
+						<div class="sim-progress-dots">
+							<div class="sim-dot" data-step="5">5</div>
+							<div class="sim-progress-line" data-line="5"></div>
+							<div class="sim-dot" data-step="6">6</div>
+							<div class="sim-progress-line" data-line="6"></div>
+							<div class="sim-dot" data-step="7">7</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Start button -->
+				<div class="sim-intro">
+					<button class="sim-start-btn" id="simStartBtn" onclick="startSimulation()">
+						&#9654; Start Simulatie
+					</button>
+				</div>
+			</div>
+
+			<div class="sim-dashboard-body">
+				<div class="sim-panel-diagram">
+
+				<!-- SVG Ontology Diagram -->
+				<div class="sim-svg-wrap" id="simSvgWrap">
+					<div class="diagram-title">Ontologie: Verpakkingsmachine Digital Twin</div>
+					<svg class="diagram-svg" viewBox="0 0 740 520" fill="none" xmlns="http://www.w3.org/2000/svg" id="simSvg">
+						<!-- Row 1: VerpakkingsMachine (center) -->
+						<rect id="simNodeMachine" x="260" y="10" width="220" height="52" rx="10" fill="#1e3a5f"/>
+						<text x="370" y="41" text-anchor="middle" fill="white" font-family="Inter,sans-serif" font-size="13" font-weight="600">VerpakkingsMachine</text>
+
+						<!-- Row 2: Klant, Onderdeel, Sensor -->
+						<rect id="simNodeKlant" x="10" y="120" width="150" height="52" rx="10" fill="#f0f5fa" stroke="#1e3a5f" stroke-width="1.5"/>
+						<text x="85" y="151" text-anchor="middle" fill="#1e3a5f" font-family="Inter,sans-serif" font-size="13" font-weight="600">Klant</text>
+
+						<rect id="simNodeOnderdeel" x="295" y="120" width="150" height="52" rx="10" fill="#f0f5fa" stroke="#1e3a5f" stroke-width="1.5"/>
+						<text x="370" y="151" text-anchor="middle" fill="#1e3a5f" font-family="Inter,sans-serif" font-size="13" font-weight="600">Onderdeel</text>
+
+						<rect id="simNodeSensor" x="580" y="120" width="150" height="52" rx="10" fill="#f0f5fa" stroke="#1e3a5f" stroke-width="1.5"/>
+						<text x="655" y="151" text-anchor="middle" fill="#1e3a5f" font-family="Inter,sans-serif" font-size="13" font-weight="600">Sensor</text>
+
+						<!-- Row 3: Storing, Onderhoudsbeurt -->
+						<rect id="simNodeStoring" x="140" y="250" width="150" height="52" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+						<text x="215" y="281" text-anchor="middle" fill="#dc2626" font-family="Inter,sans-serif" font-size="13" font-weight="600">Storing</text>
+
+						<rect id="simNodeOnderhoud" x="400" y="250" width="180" height="52" rx="10" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+						<text x="490" y="281" text-anchor="middle" fill="#16a34a" font-family="Inter,sans-serif" font-size="13" font-weight="600">Onderhoudsbeurt</text>
+
+						<!-- Row 4: Magazijn, Leverancier, Monteur -->
+						<rect id="simNodeMagazijn" x="10" y="380" width="170" height="52" rx="10" fill="#f0f5fa" stroke="#1e3a5f" stroke-width="1.5"/>
+						<text x="95" y="411" text-anchor="middle" fill="#1e3a5f" font-family="Inter,sans-serif" font-size="13" font-weight="600">Magazijn</text>
+
+						<rect id="simNodeLeverancier" x="285" y="380" width="170" height="52" rx="10" fill="#f0f5fa" stroke="#1e3a5f" stroke-width="1.5"/>
+						<text x="370" y="411" text-anchor="middle" fill="#1e3a5f" font-family="Inter,sans-serif" font-size="13" font-weight="600">Leverancier</text>
+
+						<rect id="simNodeMonteur" x="560" y="380" width="170" height="52" rx="10" fill="#f0f5fa" stroke="#1e3a5f" stroke-width="1.5"/>
+						<text x="645" y="411" text-anchor="middle" fill="#1e3a5f" font-family="Inter,sans-serif" font-size="13" font-weight="600">Monteur</text>
+
+						<!-- Edges -->
+						<!-- Machine → Klant: staat bij -->
+						<line x1="290" y1="62" x2="135" y2="120" stroke="#b5cce6" stroke-width="1.5"/>
+						<text x="195" y="85" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">staat bij</text>
+
+						<!-- Machine → Onderdeel: bevat -->
+						<line x1="370" y1="62" x2="370" y2="120" stroke="#b5cce6" stroke-width="1.5"/>
+						<text x="390" y="95" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="start">bevat</text>
+
+						<!-- Machine → Sensor: meet via -->
+						<line x1="450" y1="62" x2="605" y2="120" stroke="#b5cce6" stroke-width="1.5"/>
+						<text x="545" y="85" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">meet via</text>
+
+						<!-- Onderdeel → Storing: kan hebben -->
+						<line x1="330" y1="172" x2="255" y2="250" stroke="#b5cce6" stroke-width="1.5"/>
+						<text x="272" y="212" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">kan hebben</text>
+
+						<!-- Onderdeel → Onderhoudsbeurt: vraagt om -->
+						<line x1="410" y1="172" x2="470" y2="250" stroke="#b5cce6" stroke-width="1.5"/>
+						<text x="460" y="212" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="start">vraagt om</text>
+
+						<!-- Sensor → Storing: detecteert (dashed) -->
+						<line x1="610" y1="172" x2="275" y2="260" stroke="#b5cce6" stroke-width="1.5" stroke-dasharray="5,4"/>
+						<text x="465" y="225" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">detecteert</text>
+
+						<!-- Magazijn → Onderdeel: heeft op voorraad -->
+						<line x1="95" y1="380" x2="330" y2="172" stroke="#b5cce6" stroke-width="1.5"/>
+						<text x="180" y="285" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="middle">heeft op voorraad</text>
+
+						<!-- Leverancier → Onderdeel: levert -->
+						<line x1="370" y1="380" x2="370" y2="172" stroke="#b5cce6" stroke-width="1.5"/>
+						<text x="347" y="330" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="end">levert</text>
+
+						<!-- Monteur → Onderhoudsbeurt: voert uit -->
+						<line x1="595" y1="380" x2="530" y2="302" stroke="#b5cce6" stroke-width="1.5"/>
+						<text x="580" y="345" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="start">voert uit</text>
+
+						<!-- Monteur → Machine: gecertificeerd voor -->
+						<line x1="645" y1="380" x2="460" y2="62" stroke="#b5cce6" stroke-width="1.5" stroke-dasharray="5,4"/>
+						<text x="580" y="210" fill="#64748b" font-family="Inter,sans-serif" font-size="10" text-anchor="start">gecertificeerd voor</text>
+					</svg>
+				</div>
+				</div>
+
+				<div class="sim-panel-steps">
+				<div class="sim-step-nav" id="simStepNav" style="display:none;">
+					<button class="sim-step-nav-btn" id="simNavPrev" onclick="simNavigate(-1)" disabled>&#8592; Vorige</button>
+					<span class="sim-step-nav-label" id="simNavLabel"></span>
+					<button class="sim-step-nav-btn" id="simNavNext" onclick="simNavigate(1)" disabled>Volgende &#8594;</button>
+				</div>
+				<div class="sim-pause-hint" id="simPauseHint">
+					<p id="simPauseText"></p>
+					<button class="sim-pause-btn" id="simPauseBtn">Ga verder &#8594;</button>
+				</div>
+				<!-- Step 1: Ruwe Sensordata -->
+				<div class="sim-step" id="simStep1">
+					<div class="sim-step-label">Stap 1 &mdash; Ruwe Sensordata</div>
+					<div class="sim-sensor-grid">
+						<div class="sim-sensor-card" id="simSensorTmp">
+							<div class="sim-sensor-id">SENS-TMP-0847</div>
+							<div class="sim-sensor-value" id="simValTmp">175.2</div>
+						</div>
+						<div class="sim-sensor-card" id="simSensorSpd">
+							<div class="sim-sensor-id">SENS-SPD-1203</div>
+							<div class="sim-sensor-value" id="simValSpd">48.0</div>
+						</div>
+						<div class="sim-sensor-card" id="simSensorPrs">
+							<div class="sim-sensor-id">SENS-PRS-0551</div>
+							<div class="sim-sensor-value" id="simValPrs">3.1</div>
+						</div>
+					</div>
+					<p class="sim-step-caption">Ruwe getallen... maar wat betekenen ze?</p>
+				</div>
+
+				<!-- Step 2: Ontologie Verrijkt -->
+				<div class="sim-step" id="simStep2">
+					<div class="sim-step-label">Stap 2 &mdash; Ontologie Verrijkt</div>
+					<div class="sim-enrich-compare">
+						<div class="sim-json-box raw">
+							<span class="sim-json-label">Ruwe data</span>
+							<span id="simRawJson"></span>
+						</div>
+						<div class="sim-json-box enriched">
+							<span class="sim-json-label">Verrijkte data</span>
+							<span id="simEnrichedJson"></span>
+						</div>
+					</div>
+				</div>
+
+				<!-- Step 3: AI Analyseert -->
+				<div class="sim-step" id="simStep3">
+					<div class="sim-step-label">Stap 3 &mdash; AI Analyseert Risico</div>
+					<div class="sim-risk-container">
+						<div class="sim-risk-percentage" id="simRiskPct">0%</div>
+						<div class="sim-risk-label">Storingsrisico komende 14 dagen</div>
+						<div class="sim-risk-bar-track">
+							<div class="sim-risk-bar-fill" id="simRiskBar"></div>
+						</div>
+					</div>
+					<ul class="sim-risk-factors" id="simRiskFactors">
+						<li>Temperatuur 191.8&deg;C overschrijdt normaal bereik (170&ndash;185&deg;C)</li>
+						<li>Sealmechanisme is 11 maanden oud (verwachte levensduur: 14 mnd)</li>
+						<li>Eerdere sealfout geregistreerd op deze machine</li>
+						<li>Vergelijkbare patronen bij 3 andere FlowPack-machines leidden tot storing</li>
+					</ul>
+				</div>
+
+				<!-- Step 4: Aanbeveling -->
+				<div class="sim-step" id="simStep4">
+					<div class="sim-step-label">Stap 4 &mdash; Aanbeveling</div>
+					<div class="sim-recommendation" id="simRecommendation">
+						<h4>&#9989; Preventief Onderhoud Aanbevolen</h4>
+						<dl class="sim-rec-grid">
+							<dt>Machine</dt>
+							<dd>FlowPack 3000 (FP3K-0042)</dd>
+							<dt>Locatie</dt>
+							<dd>Unilever Rotterdam, Lijn 7</dd>
+							<dt>Actie</dt>
+							<dd>Sealmechanisme vervangen</dd>
+							<dt>Urgentie</dt>
+							<dd>Binnen 10 werkdagen</dd>
+							<dt>Geschatte downtime</dt>
+							<dd>2 uur (gepland)</dd>
+						</dl>
+						<div class="sim-rec-saving">
+							Besparing: ca. &euro;8.500 en 14 uur productieverlies voorkomen t.o.v. ongeplande stilstand
+						</div>
+					</div>
+				</div>
+
+				<!-- Phase separator -->
+				<div class="sim-step" id="simStep4b">
+					<div class="sim-phase-separator">
+						<span>Agentic AI neemt het over</span>
+					</div>
+				</div>
+
+				<!-- Step 5: Magazijncontrole -->
+				<div class="sim-step" id="simStep5">
+					<div class="sim-step-label">Stap 5 &mdash; Magazijncontrole &amp; Logistiek</div>
+					<p class="sim-step-caption" id="simPartsHeader" style="margin-top:0;margin-bottom:0.75rem;">Magazijn Eindhoven wordt gecontroleerd...</p>
+					<div class="sim-parts-list" id="simPartsList">
+						<div class="sim-part-row" id="simPart0">
+							<div class="sim-part-info">
+								<div class="sim-part-name">Sealunit compleet</div>
+								<div class="sim-part-code">SU-3000-A</div>
+							</div>
+							<div class="sim-part-status" id="simPartStatus0"></div>
+							<div class="sim-part-detail" id="simPartDetail0"></div>
+						</div>
+						<div class="sim-part-row" id="simPart1">
+							<div class="sim-part-info">
+								<div class="sim-part-name">Teflonband 3m</div>
+								<div class="sim-part-code">TB-200-TF</div>
+							</div>
+							<div class="sim-part-status" id="simPartStatus1"></div>
+							<div class="sim-part-detail" id="simPartDetail1"></div>
+						</div>
+						<div class="sim-part-row" id="simPart2">
+							<div class="sim-part-info">
+								<div class="sim-part-name">Thermokoppel sensor</div>
+								<div class="sim-part-code">TK-NTC-80</div>
+							</div>
+							<div class="sim-part-status" id="simPartStatus2"></div>
+							<div class="sim-part-detail" id="simPartDetail2"></div>
+						</div>
+						<div class="sim-part-row" id="simPart3">
+							<div class="sim-part-info">
+								<div class="sim-part-name">O-ring set (hittebestendig)</div>
+								<div class="sim-part-code">OR-SIL-42</div>
+							</div>
+							<div class="sim-part-status" id="simPartStatus3"></div>
+							<div class="sim-part-detail" id="simPartDetail3"></div>
+						</div>
+					</div>
+					<div class="sim-parts-summary" id="simPartsSummary"></div>
+				</div>
+
+				<!-- Step 6: Monteurplanning -->
+				<div class="sim-step" id="simStep6">
+					<div class="sim-step-label">Stap 6 &mdash; Monteurplanning</div>
+					<p class="sim-step-caption" style="margin-top:0;margin-bottom:0.75rem;">Beschikbare monteurs worden geanalyseerd...</p>
+					<div class="sim-engineers" id="simEngineers">
+						<div class="sim-engineer-card" id="simEngineer0">
+							<div class="sim-engineer-avatar">JV</div>
+							<div class="sim-engineer-info">
+								<div class="sim-engineer-name">Jan de Vries</div>
+								<div class="sim-engineer-cert">FlowPack 3000 &#10003;</div>
+								<div class="sim-engineer-schedule">Amsterdam &bull; Ma: Nestl&eacute; Breda, Di: vrij, Wo: FrieslandCampina Utrecht</div>
+							</div>
+							<div class="sim-engineer-badge" id="simEngBadge0"></div>
+						</div>
+						<div class="sim-engineer-card" id="simEngineer1">
+							<div class="sim-engineer-avatar">FA</div>
+							<div class="sim-engineer-info">
+								<div class="sim-engineer-name">Fatima El Amrani</div>
+								<div class="sim-engineer-cert">FlowPack 3000 &#10003;</div>
+								<div class="sim-engineer-schedule">Eindhoven &bull; Ma: Heineken Zoeterwoude, Di: Danone Utrecht, Wo: vrij</div>
+							</div>
+							<div class="sim-engineer-badge" id="simEngBadge1"></div>
+						</div>
+						<div class="sim-engineer-card" id="simEngineer2">
+							<div class="sim-engineer-avatar">PB</div>
+							<div class="sim-engineer-info">
+								<div class="sim-engineer-name">Pieter Bakker</div>
+								<div class="sim-engineer-cert">CartonneerMachine X2 &#10003;</div>
+								<div class="sim-engineer-schedule">Rotterdam &bull; Ma&ndash;Wo: beschikbaar</div>
+							</div>
+							<div class="sim-engineer-badge" id="simEngBadge2"></div>
+						</div>
+					</div>
+					<div class="sim-engineer-confirm" id="simEngConfirm"></div>
+				</div>
+
+				<!-- Step 7: Klantnotificatie -->
+				<div class="sim-step" id="simStep7">
+					<div class="sim-step-label">Stap 7 &mdash; Klantnotificatie</div>
+					<div class="sim-sending" id="simSending">
+						<div class="sim-sending-icon">&#9993;</div>
+						<div>Notificatie wordt verzonden...</div>
+					</div>
+					<div class="sim-notification" id="simNotification">
+						<div class="sim-notification-header">
+							&#9993;&nbsp; Automatische servicemelding verzonden
+						</div>
+						<div class="sim-notification-body">
+							<strong>Aan:</strong> operations@unilever-rotterdam.nl<br>
+							<strong>Betreft:</strong> Gepland preventief onderhoud &mdash; FlowPack 3000 (Lijn 7)
+							<br><br>
+							Geachte heer/mevrouw,
+							<br><br>
+							Op basis van onze continue monitoring hebben wij een verhoogd slijtagepatroon gedetecteerd in het sealmechanisme van uw FlowPack 3000 op Lijn 7.
+							<div class="sim-notification-meta">
+								<span>&#128197; Datum:</span><span>Dinsdag 18 februari 2025, 09:00 uur</span>
+								<span>&#128295; Monteur:</span><span>Jan de Vries</span>
+								<span>&#9201; Geschatte duur:</span><span>2 uur</span>
+								<span>&#128230; Onderdelen:</span><span>Worden vooraf geleverd</span>
+							</div>
+							Geen actie vereist van uw kant. Neem contact op met uw servicemanager bij vragen.
+						</div>
+						<div class="sim-notification-footer">
+							Met vriendelijke groet, PackTech Solutions &mdash; Afdeling Predictive Service
+						</div>
+					</div>
+
+					<!-- Timeline summary -->
+					<div class="sim-timeline" id="simTimeline">
+						<div class="sim-timeline-step"><span>Sensordata</span><span>0s</span></div>
+						<div class="sim-timeline-arrow">&#8594;</div>
+						<div class="sim-timeline-step"><span>Ontologie</span><span>9s</span></div>
+						<div class="sim-timeline-arrow">&#8594;</div>
+						<div class="sim-timeline-step"><span>Analyse</span><span>13s</span></div>
+						<div class="sim-timeline-arrow">&#8594;</div>
+						<div class="sim-timeline-step"><span>Aanbeveling</span><span>17s</span></div>
+						<div class="sim-timeline-arrow">&#8594;</div>
+						<div class="sim-timeline-step"><span>Onderdelen</span><span>22s</span></div>
+						<div class="sim-timeline-arrow">&#8594;</div>
+						<div class="sim-timeline-step"><span>Monteur</span><span>27s</span></div>
+						<div class="sim-timeline-arrow">&#8594;</div>
+						<div class="sim-timeline-step"><span>Klant</span><span>30s</span></div>
+					</div>
+				</div>
+
+				</div>
+			</div>
+
+			<div class="sim-dashboard-footer">
+				<!-- Reset button -->
+				<button class="sim-reset-btn" id="simResetBtn" onclick="resetSimulation()">
+					&#8635; Opnieuw starten
+				</button>
+
+				<!-- Takeaway -->
+				<div class="sim-step" id="simTakeaway">
+					<div class="takeaway">
+						<div class="takeaway-label">&#127919; Onthoud</div>
+						<p>
+							De ontologie verbindt niet alleen sensoren met machines en
+							klanten, maar ook met magazijnen, leveranciers en monteurs.
+							Hierdoor kan een AI-agent het hele proces autonoom afhandelen
+							&mdash; van detectie tot actie &mdash; zonder menselijke
+							tussenkomst. D&aacute;t is de kracht van een embedded ontologie
+							in een agentic AI-systeem.
+						</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<main class="main">
 			<!-- Quiz -->
 			<section class="section">
 				<div class="quiz" id="quiz">
@@ -2322,6 +2827,607 @@
 
 				document.getElementById("quizBtn").disabled = true;
 			}
+
+			// ── Digital Twin Simulation ──
+			(function () {
+				var simTimers = [];
+				var sensorInterval = null;
+				var simRunning = false;
+
+				// Step navigation state
+				// Maps step numbers to their element IDs (4b is grouped with 4)
+				var stepIds = {
+					1: ["simStep1"],
+					2: ["simStep2"],
+					3: ["simStep3"],
+					4: ["simStep4", "simStep4b"],
+					5: ["simStep5"],
+					6: ["simStep6"],
+					7: ["simStep7"]
+				};
+				var stepLabels = {
+					1: "Ruwe Sensordata",
+					2: "Ontologie Verrijkt",
+					3: "AI Analyseert",
+					4: "Aanbeveling",
+					5: "Magazijn & Logistiek",
+					6: "Monteurplanning",
+					7: "Klantnotificatie"
+				};
+				var completedSteps = [];
+				var currentViewStep = 0;
+				var highestStep = 0;
+
+				// Pause hints shown between steps
+				var stepHints = {
+					1: "De sensoren leveren kale getallen \u2014 zonder context weet niemand of 192\u00b0C een probleem is. De volgende stap laat zien hoe de ontologie daar betekenis aan geeft.",
+					2: "De ontologie koppelt het sensorpunt aan een onderdeel, machine en klant. E\u00e9n getal is nu een compleet verhaal. Hiermee kan AI het risico beoordelen.",
+					3: "82% kans op storing \u2014 de AI combineert temperatuur, leeftijd en historie. Zonder ontologie zou dit onmogelijk zijn. Nu volgt de aanbeveling.",
+					4: "Preventief onderhoud ingepland. Tot nu toe was dit \u201cslim analyseren\u201d \u2014 vanaf de volgende stap gaat de AI-agent zelf handelen.",
+					5: "De AI heeft zelfstandig het magazijn gecontroleerd \u00e9n een ontbrekend onderdeel bij de leverancier besteld. Alles via relaties in de ontologie.",
+					6: "Certificering, planning, locatie \u2014 de ontologie verbindt het allemaal. De AI kiest de beste monteur zonder menselijke tussenkomst."
+				};
+
+				function pauseWithHint(stepNum, callback) {
+					var hint = document.getElementById("simPauseHint");
+					var text = document.getElementById("simPauseText");
+					var btn = document.getElementById("simPauseBtn");
+					text.textContent = stepHints[stepNum];
+					hint.style.display = "block";
+					hint.scrollIntoView({ behavior: "smooth", block: "nearest" });
+					// Remove old listener by cloning
+					var newBtn = btn.cloneNode(true);
+					btn.parentNode.replaceChild(newBtn, btn);
+					newBtn.addEventListener("click", function () {
+						hint.style.display = "none";
+						callback();
+					});
+				}
+
+				function clearAllTimers() {
+					simTimers.forEach(function (t) { clearTimeout(t); });
+					simTimers = [];
+					if (sensorInterval) {
+						clearInterval(sensorInterval);
+						sensorInterval = null;
+					}
+				}
+
+				function updateProgress(step) {
+					var dots = document.querySelectorAll(".sim-dot");
+					var lines = document.querySelectorAll(".sim-progress-line");
+					dots.forEach(function (d) {
+						var s = parseInt(d.dataset.step);
+						d.classList.remove("active", "completed");
+						if (s < step) d.classList.add("completed");
+						else if (s === step) d.classList.add("active");
+					});
+					lines.forEach(function (l) {
+						var ln = parseInt(l.dataset.line);
+						l.classList.remove("active");
+						if (ln < step) l.classList.add("active");
+					});
+				}
+
+				function showStep(id) {
+					var el = document.getElementById(id);
+					if (!el) return;
+
+					// Check if this step is inside the steps panel (not takeaway in footer)
+					var inPanel = el.closest(".sim-panel-steps");
+					if (inPanel) {
+						// Hide all steps in the panel first
+						document.querySelectorAll(".sim-panel-steps .sim-step").forEach(function (s) {
+							s.classList.remove("visible");
+						});
+						el.classList.add("visible");
+						// For step 4b, also show step 4
+						if (id === "simStep4b") {
+							document.getElementById("simStep4").classList.add("visible");
+						}
+						// Track which step number this is
+						for (var num in stepIds) {
+							if (stepIds[num].indexOf(id) !== -1) {
+								var stepNum = parseInt(num);
+								currentViewStep = stepNum;
+								if (completedSteps.indexOf(stepNum) === -1) {
+									completedSteps.push(stepNum);
+								}
+								if (stepNum > highestStep) highestStep = stepNum;
+								break;
+							}
+						}
+						updateStepNav();
+					} else {
+						// Takeaway or other outside-panel step: just show it
+						el.classList.add("visible");
+					}
+				}
+
+				function updateStepNav() {
+					var nav = document.getElementById("simStepNav");
+					var prevBtn = document.getElementById("simNavPrev");
+					var nextBtn = document.getElementById("simNavNext");
+					var label = document.getElementById("simNavLabel");
+					if (currentViewStep === 0) { nav.style.display = "none"; return; }
+					nav.style.display = "flex";
+					label.textContent = "Stap " + currentViewStep + " / " + highestStep;
+					prevBtn.disabled = currentViewStep <= 1;
+					nextBtn.disabled = currentViewStep >= highestStep;
+				}
+
+				window.simNavigate = function (dir) {
+					if (simRunning) return;
+					var target = currentViewStep + dir;
+					if (target < 1 || target > highestStep) return;
+					document.getElementById("simPauseHint").style.display = "none";
+					// Show the target step's elements
+					var ids = stepIds[target];
+					// Hide all, then show all elements for this step
+					document.querySelectorAll(".sim-panel-steps .sim-step").forEach(function (s) {
+						s.classList.remove("visible");
+					});
+					ids.forEach(function (sid) {
+						var el = document.getElementById(sid);
+						if (el) el.classList.add("visible");
+					});
+					currentViewStep = target;
+					updateProgress(target);
+					updateStepNav();
+				};
+
+				function highlightNode(nodeId) {
+					var node = document.getElementById(nodeId);
+					if (node) {
+						node.classList.remove("sim-node-highlight");
+						void node.offsetWidth;
+						node.classList.add("sim-node-highlight");
+					}
+				}
+
+				// Step 1: Sensor data animation
+				function runStep1(callback) {
+					updateProgress(1);
+					showStep("simStep1");
+
+					var tmpCard = document.getElementById("simSensorTmp");
+					var spdCard = document.getElementById("simSensorSpd");
+					var prsCard = document.getElementById("simSensorPrs");
+					var tmpVal = document.getElementById("simValTmp");
+					var spdVal = document.getElementById("simValSpd");
+					var prsVal = document.getElementById("simValPrs");
+
+					// Show cards with delay
+					simTimers.push(setTimeout(function () { tmpCard.classList.add("visible"); }, 0));
+					simTimers.push(setTimeout(function () { spdCard.classList.add("visible"); }, 600));
+					simTimers.push(setTimeout(function () { prsCard.classList.add("visible"); }, 1200));
+
+					var startTemp = 175.2;
+					var endTemp = 192.0;
+					var totalTicks = Math.floor(8000 / 600);
+					var tempStep = (endTemp - startTemp) / totalTicks;
+					var currentTemp = startTemp;
+					var tickCount = 0;
+
+					sensorInterval = setInterval(function () {
+						tickCount++;
+						currentTemp += tempStep;
+						if (currentTemp > endTemp) currentTemp = endTemp;
+
+						tmpVal.textContent = currentTemp.toFixed(1);
+						spdVal.textContent = (44 + Math.random() * 8).toFixed(1);
+						prsVal.textContent = (2.8 + Math.random() * 0.7).toFixed(1);
+
+						// Color coding for temperature
+						tmpCard.classList.remove("warning", "danger");
+						if (currentTemp > 190) {
+							tmpCard.classList.add("danger");
+						} else if (currentTemp > 185) {
+							tmpCard.classList.add("warning");
+						}
+
+						if (tickCount >= totalTicks) {
+							clearInterval(sensorInterval);
+							sensorInterval = null;
+							tmpVal.textContent = "192.0";
+							if (callback) callback();
+						}
+					}, 600);
+				}
+
+				// Step 2: Ontology enrichment
+				function runStep2(callback) {
+					updateProgress(2);
+					showStep("simStep2");
+
+					// Highlight SVG nodes in sequence
+					var nodes = ["simNodeSensor", "simNodeOnderdeel", "simNodeMachine", "simNodeKlant"];
+					nodes.forEach(function (nid, i) {
+						simTimers.push(setTimeout(function () {
+							highlightNode(nid);
+						}, i * 600));
+					});
+
+					// Raw JSON
+					var rawJson = '{\n  "sensor": "SENS-TMP-0847",\n  "waarde": 191.8\n}';
+					document.getElementById("simRawJson").textContent = rawJson;
+
+					// Enriched JSON with typewriter
+					var enrichedJson = '{\n  "sensor": "SENS-TMP-0847",\n  "waarde": 191.8,\n  "type": "temperatuur",\n  "eenheid": "\u00B0C",\n  "normaal_bereik": [170, 185],\n  "onderdeel": "sealmechanisme",\n  "onderdeel_leeftijd": "11 maanden",\n  "machine": "FlowPack 3000",\n  "klant": "Unilever Rotterdam",\n  "eerdere_storingen": ["sealfout"],\n  "laatste_onderhoud": "2025-09-14"\n}';
+					var enrichedEl = document.getElementById("simEnrichedJson");
+					enrichedEl.textContent = "";
+					var charIdx = 0;
+					var typeInterval = setInterval(function () {
+						charIdx += 2;
+						if (charIdx >= enrichedJson.length) {
+							charIdx = enrichedJson.length;
+							clearInterval(typeInterval);
+						}
+						enrichedEl.textContent = enrichedJson.substring(0, charIdx);
+					}, 20);
+					simTimers.push(setTimeout(function () {
+						clearInterval(typeInterval);
+						enrichedEl.textContent = enrichedJson;
+						if (callback) callback();
+					}, 4000));
+				}
+
+				// Step 3: Risk analysis
+				function runStep3(callback) {
+					updateProgress(3);
+					showStep("simStep3");
+
+					var bar = document.getElementById("simRiskBar");
+					var pctEl = document.getElementById("simRiskPct");
+					var targetPct = 82;
+					var currentPct = 0;
+
+					// Animate risk bar
+					simTimers.push(setTimeout(function () {
+						bar.style.width = targetPct + "%";
+					}, 100));
+
+					// Animate percentage counter
+					var pctInterval = setInterval(function () {
+						currentPct += 2;
+						if (currentPct >= targetPct) {
+							currentPct = targetPct;
+							clearInterval(pctInterval);
+						}
+						pctEl.textContent = currentPct + "%";
+
+						// Color transitions
+						if (currentPct > 60) {
+							bar.style.background = "var(--danger)";
+						} else if (currentPct > 30) {
+							bar.style.background = "var(--warning)";
+						}
+					}, 50);
+
+					// Show risk factors one by one
+					var factors = document.querySelectorAll("#simRiskFactors li");
+					factors.forEach(function (f, i) {
+						simTimers.push(setTimeout(function () {
+							f.classList.add("visible");
+						}, 1200 + i * 400));
+					});
+
+					simTimers.push(setTimeout(function () {
+						clearInterval(pctInterval);
+						pctEl.textContent = targetPct + "%";
+						if (callback) callback();
+					}, 3500));
+				}
+
+				// Step 4: Recommendation
+				function runStep4(callback) {
+					updateProgress(4);
+					showStep("simStep4");
+
+					simTimers.push(setTimeout(function () {
+						document.getElementById("simRecommendation").classList.add("visible");
+					}, 200));
+
+					simTimers.push(setTimeout(function () {
+						showStep("simStep4b");
+						if (callback) callback();
+					}, 2000));
+				}
+
+				// Step 5: Parts check
+				function runStep5(callback) {
+					updateProgress(5);
+					showStep("simStep5");
+
+					// Highlight ontology nodes
+					highlightNode("simNodeMagazijn");
+					simTimers.push(setTimeout(function () { highlightNode("simNodeLeverancier"); }, 600));
+					simTimers.push(setTimeout(function () { highlightNode("simNodeOnderdeel"); }, 1200));
+
+					var parts = [
+						{ idx: 0, stock: 2, available: true, detail: "Verzonden vanuit Eindhoven \u2014 ETA morgen 08:00" },
+						{ idx: 1, stock: 14, available: true, detail: "Verzonden vanuit Eindhoven \u2014 ETA morgen 08:00" },
+						{ idx: 2, stock: 0, available: false, detail: "" },
+						{ idx: 3, stock: 8, available: true, detail: "Verzonden vanuit Eindhoven \u2014 ETA morgen 08:00" }
+					];
+
+					parts.forEach(function (p, i) {
+						simTimers.push(setTimeout(function () {
+							var row = document.getElementById("simPart" + p.idx);
+							var statusEl = document.getElementById("simPartStatus" + p.idx);
+							var detailEl = document.getElementById("simPartDetail" + p.idx);
+							row.classList.add("visible");
+
+							if (p.available) {
+								row.classList.add("available");
+								statusEl.className = "sim-part-status green";
+								statusEl.textContent = "\u2713 " + p.stock + " op voorraad";
+								detailEl.textContent = p.detail;
+							} else {
+								// First show red
+								row.classList.add("unavailable");
+								statusEl.className = "sim-part-status red";
+								statusEl.textContent = "\u2717 0 op voorraad";
+
+								// Then change to orange after 1s
+								simTimers.push(setTimeout(function () {
+									row.classList.remove("unavailable");
+									row.classList.add("ordered");
+									statusEl.className = "sim-part-status orange";
+									statusEl.textContent = "Besteld bij leverancier";
+									detailEl.textContent = "Besteld bij SealTech GmbH D\u00FCsseldorf \u2014 directe levering Rotterdam \u2014 ETA overmorgen 11:00";
+								}, 1000));
+							}
+						}, 400 + i * 400));
+					});
+
+					simTimers.push(setTimeout(function () {
+						var summary = document.getElementById("simPartsSummary");
+						summary.textContent = "Alle onderdelen geregeld \u2014 beschikbaar op locatie: overmorgen 11:00";
+						summary.classList.add("visible");
+						if (callback) callback();
+					}, 5000));
+				}
+
+				// Step 6: Engineer planning
+				function runStep6(callback) {
+					updateProgress(6);
+					showStep("simStep6");
+
+					// Highlight ontology nodes
+					highlightNode("simNodeMonteur");
+					simTimers.push(setTimeout(function () { highlightNode("simNodeOnderhoud"); }, 600));
+					simTimers.push(setTimeout(function () { highlightNode("simNodeMachine"); }, 1200));
+
+					var engineers = [
+						{ idx: 0, delay: 600 },
+						{ idx: 1, delay: 1200 },
+						{ idx: 2, delay: 1800 }
+					];
+
+					// Show cards
+					engineers.forEach(function (e) {
+						simTimers.push(setTimeout(function () {
+							document.getElementById("simEngineer" + e.idx).classList.add("visible");
+						}, e.delay));
+					});
+
+					// Show badges and classifications
+					simTimers.push(setTimeout(function () {
+						// Pieter - not certified
+						var eng2 = document.getElementById("simEngineer2");
+						eng2.classList.add("rejected");
+						var badge2 = document.getElementById("simEngBadge2");
+						badge2.className = "sim-engineer-badge rejected";
+						badge2.textContent = "Niet gecertificeerd";
+					}, 2500));
+
+					simTimers.push(setTimeout(function () {
+						// Fatima - maybe
+						var eng1 = document.getElementById("simEngineer1");
+						eng1.classList.add("maybe");
+						var badge1 = document.getElementById("simEngBadge1");
+						badge1.className = "sim-engineer-badge maybe";
+						badge1.textContent = "Mogelijk";
+					}, 3200));
+
+					simTimers.push(setTimeout(function () {
+						// Jan - best match
+						var eng0 = document.getElementById("simEngineer0");
+						eng0.classList.add("best");
+						var badge0 = document.getElementById("simEngBadge0");
+						badge0.className = "sim-engineer-badge best";
+						badge0.textContent = "Beste match";
+					}, 3800));
+
+					simTimers.push(setTimeout(function () {
+						var confirm = document.getElementById("simEngConfirm");
+						confirm.textContent = "\u2713 Jan de Vries ingepland \u2014 dinsdag 09:00, Unilever Rotterdam Lijn 7";
+						confirm.classList.add("visible");
+						if (callback) callback();
+					}, 5000));
+				}
+
+				// Step 7: Client notification
+				function runStep7() {
+					updateProgress(7);
+					showStep("simStep7");
+
+					// Show sending animation
+					var sendingEl = document.getElementById("simSending");
+					sendingEl.style.display = "block";
+
+					simTimers.push(setTimeout(function () {
+						sendingEl.style.display = "none";
+						document.getElementById("simNotification").classList.add("visible");
+					}, 1500));
+
+					// Show timeline
+					simTimers.push(setTimeout(function () {
+						document.getElementById("simTimeline").classList.add("visible");
+					}, 2500));
+
+					// Mark step 7 as completed and show reset + takeaway
+					simTimers.push(setTimeout(function () {
+						var dots = document.querySelectorAll(".sim-dot");
+						dots.forEach(function (d) {
+							d.classList.remove("active");
+							d.classList.add("completed");
+						});
+						document.querySelectorAll(".sim-progress-line").forEach(function (l) {
+							l.classList.add("active");
+						});
+
+						document.getElementById("simResetBtn").style.display = "block";
+						showStep("simTakeaway");
+						simRunning = false;
+					}, 3500));
+				}
+
+				// Start simulation
+				window.startSimulation = function () {
+					if (simRunning) return;
+					simRunning = true;
+					document.getElementById("simStartBtn").disabled = true;
+					document.getElementById("sim-section").scrollIntoView({ behavior: "smooth", block: "start" });
+
+					runStep1(function () {
+						pauseWithHint(1, function () {
+							runStep2(function () {
+								pauseWithHint(2, function () {
+									runStep3(function () {
+										pauseWithHint(3, function () {
+											runStep4(function () {
+												pauseWithHint(4, function () {
+													runStep5(function () {
+														pauseWithHint(5, function () {
+															runStep6(function () {
+																pauseWithHint(6, function () {
+																	runStep7();
+																});
+															});
+														});
+													});
+												});
+											});
+										});
+									});
+								});
+							});
+						});
+					});
+				};
+
+				// Reset simulation
+				window.resetSimulation = function () {
+					clearAllTimers();
+					simRunning = false;
+
+					// Reset progress
+					document.querySelectorAll(".sim-dot").forEach(function (d) {
+						d.classList.remove("active", "completed");
+					});
+					document.querySelectorAll(".sim-progress-line").forEach(function (l) {
+						l.classList.remove("active");
+					});
+
+					// Hide all steps
+					document.querySelectorAll(".sim-step").forEach(function (s) {
+						s.classList.remove("visible");
+					});
+
+					// Reset start button
+					document.getElementById("simStartBtn").disabled = false;
+					document.getElementById("simResetBtn").style.display = "none";
+
+					// Reset sensor cards
+					var cards = ["simSensorTmp", "simSensorSpd", "simSensorPrs"];
+					cards.forEach(function (id) {
+						var el = document.getElementById(id);
+						el.classList.remove("visible", "warning", "danger");
+					});
+					document.getElementById("simValTmp").textContent = "175.2";
+					document.getElementById("simValSpd").textContent = "48.0";
+					document.getElementById("simValPrs").textContent = "3.1";
+
+					// Reset step 2
+					document.getElementById("simRawJson").textContent = "";
+					document.getElementById("simEnrichedJson").textContent = "";
+
+					// Reset step 3
+					document.getElementById("simRiskPct").textContent = "0%";
+					var bar = document.getElementById("simRiskBar");
+					bar.style.width = "0%";
+					bar.style.background = "var(--success)";
+					document.querySelectorAll("#simRiskFactors li").forEach(function (f) {
+						f.classList.remove("visible");
+					});
+
+					// Reset step 4
+					document.getElementById("simRecommendation").classList.remove("visible");
+
+					// Reset step 5
+					for (var i = 0; i < 4; i++) {
+						var row = document.getElementById("simPart" + i);
+						row.classList.remove("visible", "available", "unavailable", "ordered");
+						document.getElementById("simPartStatus" + i).textContent = "";
+						document.getElementById("simPartStatus" + i).className = "sim-part-status";
+						document.getElementById("simPartDetail" + i).textContent = "";
+					}
+					document.getElementById("simPartsSummary").textContent = "";
+					document.getElementById("simPartsSummary").classList.remove("visible");
+
+					// Reset step 6
+					for (var j = 0; j < 3; j++) {
+						var eng = document.getElementById("simEngineer" + j);
+						eng.classList.remove("visible", "best", "maybe", "rejected");
+						document.getElementById("simEngBadge" + j).textContent = "";
+						document.getElementById("simEngBadge" + j).className = "sim-engineer-badge";
+					}
+					document.getElementById("simEngConfirm").textContent = "";
+					document.getElementById("simEngConfirm").classList.remove("visible");
+
+					// Reset step 7
+					document.getElementById("simSending").style.display = "";
+					document.getElementById("simNotification").classList.remove("visible");
+					document.getElementById("simTimeline").classList.remove("visible");
+
+					// Reset SVG highlights
+					document.querySelectorAll(".sim-node-highlight").forEach(function (n) {
+						n.classList.remove("sim-node-highlight");
+					});
+
+					// Reset navigation state
+					completedSteps = [];
+					currentViewStep = 0;
+					highestStep = 0;
+					document.getElementById("simStepNav").style.display = "none";
+					document.getElementById("simPauseHint").style.display = "none";
+				};
+
+				// Make completed dots clickable
+				document.querySelectorAll(".sim-dot").forEach(function (dot) {
+					dot.addEventListener("click", function () {
+						if (simRunning) return;
+						if (!dot.classList.contains("completed")) return;
+						var target = parseInt(dot.dataset.step);
+						if (target < 1 || target > highestStep) return;
+						document.getElementById("simPauseHint").style.display = "none";
+						// Hide all steps, show target
+						document.querySelectorAll(".sim-panel-steps .sim-step").forEach(function (s) {
+							s.classList.remove("visible");
+						});
+						var ids = stepIds[target];
+						ids.forEach(function (sid) {
+							var el = document.getElementById(sid);
+							if (el) el.classList.add("visible");
+						});
+						currentViewStep = target;
+						updateProgress(target);
+						updateStepNav();
+					});
+				});
+			})();
 		</script>
 	</body>
 </html>
